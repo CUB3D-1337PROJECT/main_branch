@@ -6,11 +6,11 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 16:56:42 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/04 16:57:26 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/04 19:58:18 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 
 static char	**free_allocation(char **str, int j)

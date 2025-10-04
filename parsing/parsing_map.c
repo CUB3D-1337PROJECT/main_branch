@@ -1,34 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/03 12:38:45 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/04 21:02:58 by slakhrou         ###   ########.fr       */
+/*   Created: 2025/10/04 20:54:00 by slakhrou          #+#    #+#             */
+/*   Updated: 2025/10/04 20:54:11 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "cub3d.h"
-
+#include "../cub3d.h"
 
 
 
-
-
-int	main(int argc, char	**argv)
-{
-	t_cub3d	*data;
-
-	data = ft_calloc(1, sizeof(t_cub3d));
-	if (!data)
-	{
-		ft_putstr_fd("Error\n calloc failed\n");
-		return (1);
-	}
-	if (parsing(argc, argv, data))
-		return (1);
-	return (0);
-}

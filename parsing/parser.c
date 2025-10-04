@@ -6,19 +6,85 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 16:34:02 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/04 19:19:12 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/04 21:08:11 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
+int	ft_isalpha(int c)
+{
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+		return (1);
+	return (0);
+}
+int	ft_isdigit(int c)
+{
+	unsigned char	uc;
 
+	uc = (unsigned char)c;
+	if (uc >= '0' && uc <= '9')
+		return (1);
+	return (0);
+}
 
+int	is_not_map(char	*s)
+{
+	int	i;
 
-int	parse_elements_map(int	fd, t_cub3d	data)
+	i = 0;
+	if (!s)
+		return (1);
+	while (s[i]  && (s[i] == '\t' || s[i] == ' '))
+		i++;
+	while (s[i])
+	{
+		if (s[i] && (s[i] == '0' || s[i] == ' ' || s[i] == '1'
+			|| s[i] == 'N' || s[i] == 'S' || s[i] == 'W' || s[i] == 'E'
+		|| s[i] == 'F' || s[i] == 'C'))
+		{
+			if (s[i + 1] && (s[i + 1] == '0' || s[i + 1] == ' ' || s[i + 1] == '1'
+			|| s[i + 1] == 'N' || s[i + 1] == 'S' || s[i + 1] == 'W' || s[i + 1] == 'E'
+		|| s[i + 1] == 'F' || s[i + 1] == 'C'))
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+int	parse_elements_map(int	fd, t_cub3d	*data)
 {
 	char	*line;
+	char	**splits;
 
+	line = get_next_line(fd);
+	while (line && is_not_map(line))
+	{
+		if (line == '\n')
+		{
+			free(line);
+			line = get_next_line(fd);
+		}
+		splits = ft_split(line, ' ');
+		if (!splits)
+		{
+			free(line);
+			ft_putstr_fd("Error\n split failed\n", 2);
+			return (1);
+		}
+		if (fill_texture(splits, data))
+			return (free(line), free_split( splits), 1);
+		free(line);
+		free_split(splits);
+		line = get_next_line(fd);
+	}
+	if (!is_not_map(line))
+	{
+		if (parse_map(line, data))
+			return (free(line), 1);
+	}
+	free(line);
+	return (0);
 }
 
 
@@ -53,7 +119,7 @@ int	check_extention(char	*str, char	*exten)
 
 int	parsing(int	argc, char	**argv, t_cub3d	*data)
 {
-	int	fd;
+	static int	fd;
 
 	if (argc > 2)
 	{
