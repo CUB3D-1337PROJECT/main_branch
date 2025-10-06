@@ -6,27 +6,19 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 16:34:02 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/04 21:08:11 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/06 21:41:48 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	ft_isalpha(int c)
-{
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-		return (1);
-	return (0);
-}
-int	ft_isdigit(int c)
-{
-	unsigned char	uc;
+// int	ft_isalpha(int c)
+// {
+// 	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+// 		return (1);
+// 	return (0);
+// }
 
-	uc = (unsigned char)c;
-	if (uc >= '0' && uc <= '9')
-		return (1);
-	return (0);
-}
 
 int	is_not_map(char	*s)
 {
@@ -37,21 +29,21 @@ int	is_not_map(char	*s)
 		return (1);
 	while (s[i]  && (s[i] == '\t' || s[i] == ' '))
 		i++;
+	if (ft_strchr(s, ',') || ft_strchr(s, '/') || ft_strnstr(s, ".xpm", ft_strlen(s)))
+		return (1);
 	while (s[i])
 	{
 		if (s[i] && (s[i] == '0' || s[i] == ' ' || s[i] == '1'
-			|| s[i] == 'N' || s[i] == 'S' || s[i] == 'W' || s[i] == 'E'
-		|| s[i] == 'F' || s[i] == 'C'))
+			|| s[i] == 'N' || s[i] == 'S' || s[i] == 'W' || s[i] == 'E'))
 		{
-			if (s[i + 1] && (s[i + 1] == '0' || s[i + 1] == ' ' || s[i + 1] == '1'
-			|| s[i + 1] == 'N' || s[i + 1] == 'S' || s[i + 1] == 'W' || s[i + 1] == 'E'
-		|| s[i + 1] == 'F' || s[i + 1] == 'C'))
-			return (0);
+			if (s[i + 1] && (s[i + 1] == '0' || s[i + 1] == ' ' || s[i + 1] == '1'))
+				return (0);
 		}
 		i++;
 	}
 	return (1);
 }
+
 int	parse_elements_map(int	fd, t_cub3d	*data)
 {
 	char	*line;
@@ -60,11 +52,13 @@ int	parse_elements_map(int	fd, t_cub3d	*data)
 	line = get_next_line(fd);
 	while (line && is_not_map(line))
 	{
-		if (line == '\n')
+		while (!ft_strcmp(line, "\n") || is_empty(line))
 		{
 			free(line);
 			line = get_next_line(fd);
 		}
+		while (*line == '\t')
+			line++;
 		splits = ft_split(line, ' ');
 		if (!splits)
 		{
@@ -72,54 +66,73 @@ int	parse_elements_map(int	fd, t_cub3d	*data)
 			ft_putstr_fd("Error\n split failed\n", 2);
 			return (1);
 		}
-		if (fill_texture(splits, data))
+		if (fill_texture(line, splits, data))
 			return (free(line), free_split( splits), 1);
 		free(line);
 		free_split(splits);
 		line = get_next_line(fd);
 	}
-	if (!is_not_map(line))
-	{
-		if (parse_map(line, data))
-			return (free(line), 1);
-	}
-	free(line);
+	if (check_data_texture(data))
+		return (free(line), 1);
+	// if (!is_not_map(line))
+	// {
+	// 	if (parse_map(line, data))
+	// 		return (free(line), 1);
+	//	free(line);
+	// }
 	return (0);
 }
 
 
-int	check_extention(char	*str, char	*exten)
+// int	check_extention(char	*str, char	*exten)
+// {
+// 	char	*p_point;
+// 	//char	*q;
+
+// 	if (!str)
+// 		return (1);
+// 	p_point = ft_strchr(str, '.');
+// 	if (!p_point || ft_strcmp(p_point, exten))
+// 	{
+// 		ft_putstr_fd("Error\n Invalid map type\n", 2);
+// 		return (1);
+// 	}
+// 	// q = p_point;
+// 	// while (q < p_point)
+// 	// {
+// 	// 	if (*q == '.')
+// 	// 	{
+// 	// 		if (*(q + 1) != '/')
+// 	// 		{
+// 	// 			ft_putstr_fd("Error\nInvalid map type\n", 2);
+// 	// 			return (1);
+// 	// 		}
+// 	// 	}
+// 	// 	q++;
+// 	// }
+// 	return (0);
+// }
+
+int check_extention(char *str, char *exten)
 {
-	char	*p_point;
-	char	*q;
+    int len_str = ft_strlen(str);
+    int len_ext = ft_strlen(exten);
 
-	if (!str)
-		return (1);
-	p_point = ft_strchr(str, '.');
-	if (!p_point || ft_strcmp(p_point, exten))
-	{
-		ft_putstr_fd("Error\n Invalid map type\n", 2);
-		return (1);
-	}
-	q = p_point;
-	while (q < p_point)
-	{
-		if (*q == '.')
-		{
-			if (*(q + 1) != '/')
-			{
-				ft_putstr_fd("Error\nInvalid map type\n", 2);
-				return (1);
-			}
-		}
-		q++;
-	}
-	return (0);
+    if (len_str < len_ext)
+        return 1; // too short to be valid
+
+    if (ft_strcmp(str + len_str - len_ext, exten) != 0)
+    {
+        ft_putstr_fd("Error\nInvalid map type\n", 2);
+        return 1;
+    }
+    return 0;
 }
+
 
 int	parsing(int	argc, char	**argv, t_cub3d	*data)
 {
-	static int	fd;
+	int	fd;
 
 	if (argc > 2)
 	{
