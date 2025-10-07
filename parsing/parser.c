@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 16:34:02 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/06 21:41:48 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/07 19:44:28 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,18 @@ int	parse_elements_map(int	fd, t_cub3d	*data)
 	line = get_next_line(fd);
 	while (line && is_not_map(line))
 	{
-		while (!ft_strcmp(line, "\n") || is_empty(line))
+		printf("\n line [%s]", line);
+		while (!ft_strcmp(line, "\n"))// || is_empty(line))
 		{
 			free(line);
 			line = get_next_line(fd);
 		}
-		while (*line == '\t')
-			line++;
-		splits = ft_split(line, ' ');
+		printf("\n *****line [%s]", line);
+		if (!is_not_map(line))
+				break;
+		// while (*line == '\t')
+		// 	line++;
+		splits = ft_split(line, " \n\t");
 		if (!splits)
 		{
 			free(line);
@@ -67,13 +71,14 @@ int	parse_elements_map(int	fd, t_cub3d	*data)
 			return (1);
 		}
 		if (fill_texture(line, splits, data))
-			return (free(line), free_split( splits), 1);
+			return (free(line), free_split(splits), 1);
 		free(line);
 		free_split(splits);
 		line = get_next_line(fd);
 	}
 	if (check_data_texture(data))
 		return (free(line), 1);
+	free(line);  // rember to remove it
 	// if (!is_not_map(line))
 	// {
 	// 	if (parse_map(line, data))
@@ -123,7 +128,7 @@ int check_extention(char *str, char *exten)
 
     if (ft_strcmp(str + len_str - len_ext, exten) != 0)
     {
-        ft_putstr_fd("Error\nInvalid map type\n", 2);
+        ft_putstr_fd("Error\nInvalid map file type\n", 2);
         return 1;
     }
     return 0;
@@ -134,7 +139,7 @@ int	parsing(int	argc, char	**argv, t_cub3d	*data)
 {
 	int	fd;
 
-	if (argc > 2)
+	if (argc != 2)
 	{
 		ft_putstr_fd("Error\nWrong number of arguments\n", 2);
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:51:56 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/06 18:00:21 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/07 20:12:30 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,7 @@ int	parse_int(char	*s)
 		return (1);
 	while (s[i] == ' ' || s[i] == '\t')
 		i++;
-	if (s[i] == '+')
-		i++;
-	if (!ft_isdigit(s[i]))
-		return (1);
 	while (s[i] && ft_isdigit(s[i]))
-		i++;
-	while (s[i] && (s[i] == ' ' || s[i] == '\t'))
 		i++;
 	if (s[i] != '\0')
 		return (1);

@@ -1,14 +1,22 @@
-NO ./path_to_the_north_texture.xpm
 
-SO ./path_to_the_south_texture.xpm
 
-WE ./path_to_the_west_texture.xpm
 
-EA ./path_to_the_east_texture.xpm
+SO /home/slakhrou/Desktop/cub3/textures/paving.png
+WE /home/slakhrou/Desktop/cub3/textures/ReflectingTheLava.png
 
-F 220,100,0
+EA /home/slakhrou/Desktop/cub3/textures/stone_wall.png
+
+NO /home/slakhrou/Desktop/cub3/textures/DesolatedHut.png
+
+F  220,100,0	
 
 C 225,30,0
+
+
+
+
+
+
 
 
 

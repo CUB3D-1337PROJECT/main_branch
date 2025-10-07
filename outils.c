@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 16:55:06 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/04 21:28:39 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/06 15:38:04 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,27 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		i++;
 	}
 	return (0);
+}
+
+char	*ft_strnstr(const char	*str, const char	*substr, size_t len)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	if (*substr == '\0')
+		return ((char *)str);
+	while (i < len && str[i])
+	{
+		if (str[i] == substr[0])
+		{
+			j = 0;
+			while (substr[j] && (i + j) < len && str[i + j] == substr[j])
+				j++;
+			if (substr[j] == '\0')
+				return ((char *) &str[i]);
+		}
+		i++;
+	}
+	return (NULL);
 }
