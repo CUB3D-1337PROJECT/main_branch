@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 16:56:42 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/07 15:48:43 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/12 15:43:49 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ static int	is_sep(char c, char *charset)
 	return (0);
 }
 
-static void	free_allocation(char **arr, int j)
+void	free_allocation(char **arr, int j)
 {
 	while (j-- > 0)
 		free(arr[j]);

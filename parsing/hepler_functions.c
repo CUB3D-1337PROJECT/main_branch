@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:42:09 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/07 19:32:15 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/11 20:07:27 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	check_data_texture(t_cub3d	*data)
 	if (data->counters.nb_ceiling != 1 || data->counters.nb_no_tex != 1
 	|| data->counters.nb_so_tex != 1 || data->counters.nb_we_tex != 1
 	|| data->counters.nb_ea_tex!= 1 || data->counters.nb_flour != 1)
-		return (ft_putstr_fd("Error\n invalid textures\n", 2), 1);
+		return (ft_putstr_fd("Error\n invalid map file contents\n", 2), 1);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:54:14 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/07 19:39:07 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/13 18:42:44 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,13 @@ int	fill_texture(char	*line, char	**splits, t_cub3d	*data)
 
 	count = count_elment(splits);
 	printf("\n count splited %d  splited[%s]\n", count, splits[0]);
-	if (count != 2 || *splits == NULL)
+	if (count != 2  && splits[0])//|| *splits == NULL)
 			return (ft_putstr_fd("Error\n wrong texture\n", 2), 1);
 	ident = find_identifier(splits[0]);
 	if (!ident)
 		return (ft_putstr_fd("Error\n wrong texture identifier\n", 2), 1);
-	if (*(ft_strnstr(line, ident, ft_strlen(line)) + ft_strlen(ident)) != ' ')
+	if (*(ft_strnstr(line, ident, ft_strlen(line)) + ft_strlen(ident)) != ' '
+	&& *(ft_strnstr(line, ident, ft_strlen(line)) + ft_strlen(ident)) != '\t')
 		return (free(ident), ft_putstr_fd("Error\n there is no space after identifier\n", 2), 1);
 	if (ft_strcmp(ident, "F") && ft_strcmp(ident, "C"))
 	{

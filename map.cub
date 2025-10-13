@@ -1,24 +1,17 @@
 
 
+SO                       ./textures/paving.png
+WE ./textures/ReflectingTheLava.png
 
-SO /home/slakhrou/Desktop/cub3/textures/paving.png
-WE /home/slakhrou/Desktop/cub3/textures/ReflectingTheLava.png
+EA ./textures/stone_wall.png
 
-EA /home/slakhrou/Desktop/cub3/textures/stone_wall.png
+NO ./textures/DesolatedHut.png
 
-NO /home/slakhrou/Desktop/cub3/textures/DesolatedHut.png
 
-F  220,100,0	
+
+F  220,100,0
 
 C 225,30,0
-
-
-
-
-
-
-
-
 
         1111111111111111111111111
         1000000000110000000000001
@@ -34,5 +27,50 @@ C 225,30,0
 11000001110101011111011110N0111
 11110111 1110101 101111010001
 11111111 1111111 111111111111
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

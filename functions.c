@@ -6,12 +6,35 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:59:10 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/04 19:34:26 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/13 16:00:56 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+char	*ft_copy(char	*s1)
+{
+	char	*copy;
+	int		i;
+	size_t	len;
+
+	i = 0;
+	if (!s1)
+		return (NULL);
+	len = ft_strlen(s1);
+	if (len > 0 && s1[len - 1] == '\n')
+		len--;
+	copy = malloc((len + 1) * sizeof(char));
+	if (!copy)
+		return (NULL);
+	while (i < (int) len)
+	{
+		copy[i] = s1[i];
+		i++;
+	}
+	copy[i] = '\0';
+	return (copy);
+}
 
 char	*ft_strdup(const char	*s1)
 {

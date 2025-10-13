@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 16:34:02 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/07 19:44:28 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/13 18:21:47 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,85 @@
 // }
 
 
-int	is_not_map(char	*s)
+// int	is_not_map(char	*s)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	if (!s)
+// 		return (1);
+// 	while (s[i]  && (s[i] == '\t' || s[i] == ' '))
+// 		i++;
+// 	if (ft_strchr(s, ',') || ft_strchr(s, '/') || ft_strnstr(s, ".xpm", ft_strlen(s)))
+// 		return (1);
+// 	while (s[i])
+// 	{
+// 		if (s[i] && (s[i] == '0' || s[i] == ' ' || s[i] == '1'
+// 			|| s[i] == 'N' || s[i] == 'S' || s[i] == 'W' || s[i] == 'E'))
+// 		{
+// 			if (s[i + 1] && (s[i + 1] == '0' || s[i + 1] == ' ' || s[i + 1] == '1'))
+// 				return (0);
+// 		}
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
+
+int	is_not_map(char *s)
 {
 	int	i;
+	int	has_valid_char;
 
-	i = 0;
 	if (!s)
 		return (1);
-	while (s[i]  && (s[i] == '\t' || s[i] == ' '))
+	i = 0;
+	has_valid_char = 0;
+	while (s[i] == ' ' || s[i] == '\t')
 		i++;
-	if (ft_strchr(s, ',') || ft_strchr(s, '/') || ft_strnstr(s, ".xpm", ft_strlen(s)))
+	if (ft_strchr(s, ',') || ft_strchr(s, '/') || ft_strnstr(s, ".png", ft_strlen(s)))
 		return (1);
-	while (s[i])
+	if (s[i] && !ft_strchr("01NSEW", s[i]))
+		return (1);
+	while (s[i] && s[i] != '\n')
 	{
-		if (s[i] && (s[i] == '0' || s[i] == ' ' || s[i] == '1'
-			|| s[i] == 'N' || s[i] == 'S' || s[i] == 'W' || s[i] == 'E'))
-		{
-			if (s[i + 1] && (s[i + 1] == '0' || s[i + 1] == ' ' || s[i + 1] == '1'))
-				return (0);
-		}
+		if (!ft_strchr(" 01NSEW\t", s[i]))
+			return (1);
+		if (ft_strchr("01NSEW", s[i]))
+			has_valid_char = 1;
 		i++;
 	}
-	return (1);
+	if (!has_valid_char)
+		return (1);
+	return (0);
+}
+
+// int	is_empty(char	*s)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (s[i] == '\t')
+// 		i++;
+// 	if (s[i] == '\0')
+// 		return (1);
+// 	return (0);
+// }
+
+int is_empty(char	*line)
+{
+    int i = 0;
+
+    // if (!line)
+    //     return (1);
+
+    while (line[i])
+    {
+        if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+            return (0);
+        i++;
+    }
+    return (1);
 }
 
 int	parse_elements_map(int	fd, t_cub3d	*data)
@@ -50,10 +107,15 @@ int	parse_elements_map(int	fd, t_cub3d	*data)
 	char	**splits;
 
 	line = get_next_line(fd);
+	if (!line || !is_not_map(line))
+	{
+		ft_putstr_fd("Error\n invalid map file contents \n", 2);
+		return (1);
+	}
 	while (line && is_not_map(line))
 	{
 		printf("\n line [%s]", line);
-		while (!ft_strcmp(line, "\n"))// || is_empty(line))
+		while (is_empty(line))
 		{
 			free(line);
 			line = get_next_line(fd);
@@ -61,8 +123,6 @@ int	parse_elements_map(int	fd, t_cub3d	*data)
 		printf("\n *****line [%s]", line);
 		if (!is_not_map(line))
 				break;
-		// while (*line == '\t')
-		// 	line++;
 		splits = ft_split(line, " \n\t");
 		if (!splits)
 		{
@@ -78,13 +138,12 @@ int	parse_elements_map(int	fd, t_cub3d	*data)
 	}
 	if (check_data_texture(data))
 		return (free(line), 1);
-	free(line);  // rember to remove it
-	// if (!is_not_map(line))
-	// {
-	// 	if (parse_map(line, data))
-	// 		return (free(line), 1);
-	//	free(line);
-	// }
+	if (!is_not_map(line))
+	{
+		if (parse_map(line, fd, data))
+			return (1);
+		//free(line);
+	}
 	return (0);
 }
 
