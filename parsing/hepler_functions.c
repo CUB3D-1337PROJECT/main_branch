@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:42:09 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/11 20:07:27 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/16 14:53:31 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,23 @@ void	free_cub3d(t_cub3d	*data)
 		free(data->ea_tex);
 	if (data->map)
 		free_split(data->map);
+	if (data->texts)
+	{
+		delete_textures(data->texts);
+		free(data->texts);
+	}
 	free(data);
 }
 
 int	check_data_texture(t_cub3d	*data)
 {
 	if (data->counters.nb_ceiling != 1 || data->counters.nb_no_tex != 1
-	|| data->counters.nb_so_tex != 1 || data->counters.nb_we_tex != 1
-	|| data->counters.nb_ea_tex!= 1 || data->counters.nb_flour != 1)
-		return (ft_putstr_fd("Error\n invalid map file contents\n", 2), 1);
+		|| data->counters.nb_so_tex != 1 || data->counters.nb_we_tex != 1
+		|| data->counters.nb_ea_tex != 1 || data->counters.nb_flour != 1)
+	{
+		putstr_fd("Error\n invalid map file contents (textures)\n", 2);
+		return (1);
+	}
 	return (0);
 }
 
@@ -57,7 +65,7 @@ char	*find_identifier(char	*first_split)
 {
 	int		j;
 	char	*identifier;
-	char 	*ident[7];
+	char	*ident[7];
 
 	j = 0;
 	ident[0] = "NO";
@@ -81,7 +89,7 @@ char	*find_identifier(char	*first_split)
 	return (NULL);
 }
 
-int	check_rgb(char	**split_colors, int	rgb[3])
+int	check_rgb(char	**split_colors, int rgb[3])
 {
 	int	i;
 

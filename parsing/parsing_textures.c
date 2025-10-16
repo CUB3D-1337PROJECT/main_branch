@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:54:14 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/13 18:42:44 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/16 16:17:38 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ static int	assign_texture(char *ident, char *path_texture, t_cub3d *data)
 	return (0);
 }
 
-static int	fill_data_texture(char	*ident,char	*path_texture,t_cub3d *data)
+static int	fill_data_texture(char	*ident, char	*path_texture,
+	t_cub3d *data)
 {
 	int	fd;
 
 	fd = open(path_texture, O_RDONLY);
-	printf("\n FD: %d PATH[%s]\n", fd, path_texture);
 	if (fd < 0)
 		return (perror("Error\n can't open texture\n"), 1);
 	close(fd);
@@ -78,7 +78,8 @@ static int	fill_data_colors(char	*ident, char	*color, t_cub3d	*data)
 	if (!split_colors)
 		return (1);
 	if (count_elment(split_colors) != 3 || check_rgb(split_colors, rgb))
-		return (free_split(split_colors), ft_putstr_fd("Error\n wrong in rgb colors\n", 2), 1);
+		return (free_split(split_colors),
+			putstr_fd("Error\n wrong in rgb colors\n", 2), 1);
 	if (!ft_strcmp(ident, "F"))
 	{
 		if (!data->flour)
@@ -101,18 +102,18 @@ int	fill_texture(char	*line, char	**splits, t_cub3d	*data)
 	char	*ident;
 
 	count = count_elment(splits);
-	printf("\n count splited %d  splited[%s]\n", count, splits[0]);
-	if (count != 2  && splits[0])//|| *splits == NULL)
-			return (ft_putstr_fd("Error\n wrong texture\n", 2), 1);
+	if (count != 2 && splits[0])
+		return (putstr_fd("Error\n wrong texture\n", 2), 1);
 	ident = find_identifier(splits[0]);
 	if (!ident)
-		return (ft_putstr_fd("Error\n wrong texture identifier\n", 2), 1);
+		return (putstr_fd("Error\n wrong texture identifier\n", 2), 1);
 	if (*(ft_strnstr(line, ident, ft_strlen(line)) + ft_strlen(ident)) != ' '
-	&& *(ft_strnstr(line, ident, ft_strlen(line)) + ft_strlen(ident)) != '\t')
-		return (free(ident), ft_putstr_fd("Error\n there is no space after identifier\n", 2), 1);
+		&& *(ft_strnstr(line, ident, ft_strlen(line)) + ft_strlen(ident))
+		!= '\t')
+		return (free(ident), putstr_fd("Error\nspace on identifier\n", 2), 1);
 	if (ft_strcmp(ident, "F") && ft_strcmp(ident, "C"))
 	{
-		if (fill_data_texture(ident,splits[1], data))
+		if (fill_data_texture(ident, splits[1], data))
 			return (free(ident), 1);
 	}
 	else if (ft_strcmp(ident, "F") == 0 || !ft_strcmp(ident, "C"))

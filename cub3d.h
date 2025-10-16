@@ -6,23 +6,22 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:34 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/13 17:32:34 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/16 15:03:09 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include<unistd.h>
-# include<stdlib.h>
-#include <stdint.h>
-# include<stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdint.h>
+# include <stdio.h>
 # include <limits.h>
 # include <fcntl.h>
 # include <errno.h>
 
-#include "MLX42/include/MLX42/MLX42.h"
-
+# include "MLX42/include/MLX42/MLX42.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE	25
@@ -43,33 +42,39 @@ typedef struct s_count
 	int	nb_flour;
 	int	nb_ceiling;
 	int	nb_players;
-}				t_count;
+}			t_count;
+
+typedef struct s_textures
+{
+	mlx_texture_t	*text_no;
+	mlx_texture_t	*text_so;
+	mlx_texture_t	*text_ea;
+	mlx_texture_t	*text_we;
+}				t_textures;
 
 typedef struct s_cub3d
 {
-	char	*no_tex;
-	char	*so_tex;
-	char	*ea_tex;
-	char	*we_tex;
-	int		*flour;
-	int		*ceiling;
-	t_count	counters;
-	char	**map;
-	int		map_length;
-	int		map_width;
-	int		player_x;
-	int		player_y;
-	char	player_view;
+	char		*no_tex;
+	char		*so_tex;
+	char		*ea_tex;
+	char		*we_tex;
+	int			*flour;
+	int			*ceiling;
+	t_count		counters;
+	char		**map;
+	t_textures	*texts;
+	int			map_length;
+	int			map_width;
+	int			player_x;
+	int			player_y;
+	char		player_view;
 }				t_cub3d;
-
-
 int		is_empty(char	*line);
+void	free_allocation(char **arr, int j);
 int		is_not_map(char	*s);
-void	ft_putstr_fd(char	*s, int fd);
+void	putstr_fd(char	*s, int fd);
 void	ft_putchar_fd(char c, int fd);
 char	*ft_copy(char	*s1);
-//void	ft_putendl_fd(char	*s, int fd);
-//char	**ft_split(char const *s, char c);
 char	**ft_split(char	*s, char	*charset);
 void	free_allocation(char **arr, int j);
 void	free_split(char	**str);
@@ -78,7 +83,6 @@ size_t	ft_strlen(const char *str);
 char	*ft_strdup(const char	*s1);
 char	*ft_strjoin(char const *s1, char const	*s2);
 char	*ft_strchr(const char *s, int c);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_substr(char const	*s, unsigned int start, size_t	len);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strnstr(const char	*str, const char	*substr, size_t len);
@@ -88,17 +92,20 @@ int		parse_int(char	*s);
 char	*get_next_line(int fd);
 int		check_data_texture(t_cub3d	*data);
 int		count_elment(char	**str);
-int		parsing(int	argc, char	**argv, t_cub3d	*data);
+int		parsing(int argc, char	**argv, t_cub3d	*data);
 int		check_extention(char	*str, char	*exten);
 int		fill_texture(char	*line, char	**splits, t_cub3d	*data);
-int		check_rgb(char	**split_colors, int	rgb[3]);
+int		check_rgb(char	**split_colors, int rgb[3]);
 char	*find_identifier(char	*first_split);
 int		parse_map(char	*line, int fd, t_cub3d	*data);
 int		get_max_width(t_list	*lst);
 int		is_space_neighbour(char	**map, int i, int j);
-int		is_valid_content(char	c);
-int		validate_map(t_cub3d	*data, int	columns);
+int		is_valid_content(char c);
+int		validate_map(t_cub3d	*data, int columns);
 void	free_list(t_list	**lst);
 void	free_cub3d(t_cub3d	*data);
-
+int		load_textures(t_cub3d	*data);
+void	delete_textures(t_textures	*textures);
+void	delete_textures(t_textures	*textures);
+void	ft_append(t_list	**lst, char	*line);
 #endif

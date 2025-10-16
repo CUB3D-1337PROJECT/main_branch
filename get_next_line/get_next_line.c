@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:59:06 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/07 18:11:32 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/15 18:27:48 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*get_next_line(int fd)
 	char		*returned_line;
 	char		*buffer;
 
-	if (fd < 0 || fd >=  1024 || BUFFER_SIZE <= 0 || BUFFER_SIZE > SIZE_MAX)
+	if (fd < 0 || fd >= 1024 || BUFFER_SIZE <= 0 || BUFFER_SIZE > SIZE_MAX)
 		return (NULL);
 	buffer = (char *)malloc((size_t)(BUFFER_SIZE)+ 1);
 	if (!buffer)
