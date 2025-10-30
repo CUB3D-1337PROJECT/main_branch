@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:34 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/16 15:03:09 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/30 15:53:20 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <fcntl.h>
 # include <errno.h>
 
-# include "MLX42/include/MLX42/MLX42.h"
+# include "/home/slakhrou/Desktop/MLX42/include/MLX42/MLX42.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE	25
@@ -69,6 +69,7 @@ typedef struct s_cub3d
 	int			player_y;
 	char		player_view;
 }				t_cub3d;
+
 int		is_empty(char	*line);
 void	free_allocation(char **arr, int j);
 int		is_not_map(char	*s);
@@ -90,12 +91,13 @@ int		ft_atoi(const char	*str);
 int		ft_isdigit(int c);
 int		parse_int(char	*s);
 char	*get_next_line(int fd);
-int		check_data_texture(t_cub3d	*data);
+int		check_data_texture(t_cub3d	*data, char	*line);
 int		count_elment(char	**str);
 int		parsing(int argc, char	**argv, t_cub3d	*data);
 int		check_extention(char	*str, char	*exten);
 int		fill_texture(char	*line, char	**splits, t_cub3d	*data);
-int		check_rgb(char	**split_colors, int rgb[3]);
+int		check_rgb(char	**split_colors, int rgb[3], char	*color);
+int		check_two_commas(char	*color);
 char	*find_identifier(char	*first_split);
 int		parse_map(char	*line, int fd, t_cub3d	*data);
 int		get_max_width(t_list	*lst);

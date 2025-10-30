@@ -1,12 +1,11 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-MLX_DIR = ./MLX42
-MLXF = -I$(MLX_DIR)/include \
-		-L$(MLX_DIR)/build -lmlx42 \
-		-L$(MLX_DIR)/build/_deps/glfw-build/src -lglfw3\
-		-ldl -pthread -lm -lX11
+CFLAGS = -Wall -Wextra -Werror -I$(MLX_DIR)
+MLX_DIR = /home/slakhrou/Desktop/MLX42/build
+MLXF = -L$(MLX_DIR)	-lmlx42 -lglfw -lX11 -lXext -lm
 RM = rm -rf
+
 NAME = cub3D
+
 SRC =	main.c	\
 		get_next_line/get_next_line.c	outils.c	functions.c\
 		parsing/parser.c	parsing/printing.c	parsing/parsing_map.c\
@@ -24,6 +23,9 @@ $(NAME) : $(OBJ)
 %.o : %.c	cub3d.h
 	$(CC)	$(CFLAGS)	-c	$< -o $@
 
+$(MLX_DIR)/libmlx42.a:
+	cmake -B $(MLX_DIR) -S	/home/slakhrou/Desktop/MLX42
+	cmake -C	$(MLX_DIR)
 clean :
 	$(RM)	$(OBJ)
 

@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:54:14 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/16 16:17:38 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/29 20:33:09 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	fill_data_colors(char	*ident, char	*color, t_cub3d	*data)
 	split_colors = ft_split(color, ",");
 	if (!split_colors)
 		return (1);
-	if (count_elment(split_colors) != 3 || check_rgb(split_colors, rgb))
+	if (count_elment(split_colors) != 3 || check_rgb(split_colors, rgb, color))
 		return (free_split(split_colors),
 			putstr_fd("Error\n wrong in rgb colors\n", 2), 1);
 	if (!ft_strcmp(ident, "F"))
@@ -103,7 +103,8 @@ int	fill_texture(char	*line, char	**splits, t_cub3d	*data)
 
 	count = count_elment(splits);
 	if (count != 2 && splits[0])
-		return (putstr_fd("Error\n wrong texture\n", 2), 1);
+		return (putstr_fd(
+				"Error\n Invalid line ( not texture and not map)\n", 2), 1);
 	ident = find_identifier(splits[0]);
 	if (!ident)
 		return (putstr_fd("Error\n wrong texture identifier\n", 2), 1);

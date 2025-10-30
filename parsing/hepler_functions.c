@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:42:09 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/16 14:53:31 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/29 20:36:51 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ void	free_cub3d(t_cub3d	*data)
 	free(data);
 }
 
-int	check_data_texture(t_cub3d	*data)
+int	check_data_texture(t_cub3d	*data, char	*line)
 {
-	if (data->counters.nb_ceiling != 1 || data->counters.nb_no_tex != 1
-		|| data->counters.nb_so_tex != 1 || data->counters.nb_we_tex != 1
-		|| data->counters.nb_ea_tex != 1 || data->counters.nb_flour != 1)
+	if (!is_not_map(line)
+		&& (data->counters.nb_ceiling != 1 || data->counters.nb_no_tex != 1
+			|| data->counters.nb_so_tex != 1 || data->counters.nb_we_tex != 1
+			|| data->counters.nb_ea_tex != 1 || data->counters.nb_flour != 1))
 	{
-		putstr_fd("Error\n invalid map file contents (textures)\n", 2);
+		putstr_fd("Error\n invalid contents(wrong Order ||wrong Textures)\n",
+			2);
 		return (1);
 	}
 	return (0);
@@ -89,11 +91,15 @@ char	*find_identifier(char	*first_split)
 	return (NULL);
 }
 
-int	check_rgb(char	**split_colors, int rgb[3])
+int	check_rgb(char	**split_colors, int rgb[3], char	*color)
 {
 	int	i;
 
 	i = 0;
+	if (check_two_commas(color))
+	{
+		return (1);
+	}
 	while (i < 3)
 	{
 		if (parse_int(split_colors[i]))
