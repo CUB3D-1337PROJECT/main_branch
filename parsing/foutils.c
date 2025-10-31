@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:38:36 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/29 16:46:21 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/31 14:36:14 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,20 @@ int	check_two_commas(char	*color)
 	if (commas != 2)
 		return (1);
 	return (0);
+}
+
+int	is_only_spaces(char	*line)
+{
+	int	i;
+
+	i = 0;
+	if (line[0] == '\n')
+		return (0);
+	while (line[i] && line[i] != '\n')
+	{
+		if (line[i] != ' ' && line[i] != '\t')
+			return (0);
+		i++;
+	}
+	return (1);
 }

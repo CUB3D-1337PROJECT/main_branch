@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:54:00 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/29 20:32:06 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/10/31 14:35:55 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ int	check_empty_line_in_map(int fd, char	*line)
 			free(line);
 			line = get_next_line(fd);
 		}
-		if (line && !is_not_map(line))
+		if (line && !is_not_map(line) && !is_only_spaces(line))
 		{
 			putstr_fd("Error\nInvalid map: empty line inside map\n", 2);
 			free(line);
 			return (1);
 		}
-		else if (line && is_not_map(line))
+		else if (line && is_not_map(line) && !is_only_spaces(line))
 		{
 			putstr_fd("Error\n wrong content after map\n", 2);
 			free(line);
@@ -125,7 +125,7 @@ int	parse_map(char *line, int fd, t_cub3d *data)
 	count = 0;
 	while (line)
 	{
-		if (is_not_map(line))
+		if (is_not_map(line) && !is_only_spaces(line))
 			break ;
 		ft_append(&lst, line);
 		count++;

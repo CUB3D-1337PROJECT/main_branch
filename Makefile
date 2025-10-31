@@ -1,9 +1,10 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(MLX_DIR)
+CFLAGS = -Wall -Wextra -Werror -I$(MLX_DIR) -I$(GLFW_DIR)/include
 MLX_DIR = /home/slakhrou/Desktop/MLX42/build
-MLXF = -L$(MLX_DIR)	-lmlx42 -lglfw -lX11 -lXext -lm
-RM = rm -rf
+GLFW_DIR = /home/slakhrou/Desktop/MLX42/glfw
+MLXF = -L$(MLX_DIR) -lmlx42 -L$(GLFW_DIR)/build/src -lglfw3 -lX11 -lXext -lm
 
+RM = rm -rf
 NAME = cub3D
 
 SRC =	main.c	\
@@ -15,21 +16,26 @@ SRC =	main.c	\
 
 OBJ = $(SRC:.c=.o)
 
-all : $(NAME)
+all:$(NAME)
 
-$(NAME) : $(OBJ)
-	$(CC)	$(CFLAGS)	$(OBJ)	$(MLXF)	-o $(NAME)
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(MLXF) -o $(NAME)
 
-%.o : %.c	cub3d.h
-	$(CC)	$(CFLAGS)	-c	$< -o $@
+%.o: %.c cub3d.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(GLFW_DIR)/build/src/libglfw3.a:
+	cmake -S $(GLFW_DIR) -B $(GLFW_DIR)/build
+	cmake --build $(GLFW_DIR)/build
 
 $(MLX_DIR)/libmlx42.a:
 	cmake -B $(MLX_DIR) -S	/home/slakhrou/Desktop/MLX42
 	cmake -C	$(MLX_DIR)
-clean :
-	$(RM)	$(OBJ)
 
-fclean : clean
-	$(RM)	$(NAME)
+clean:
+	$(RM) $(OBJ)
 
-re : fclean	all
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all
