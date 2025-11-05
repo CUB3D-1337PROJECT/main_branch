@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:42:09 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/29 20:36:51 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/05 20:50:52 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	free_cub3d(t_cub3d	*data)
 {
 	if (data->no_tex)
 		free(data->no_tex);
-	if (data->no_tex)
-		free(data->so_tex);
 	if (data->so_tex)
+		free(data->so_tex);
+	if (data->we_tex)
 		free(data->we_tex);
-	if (data->no_tex)
+	if (data->ea_tex)
 		free(data->ea_tex);
 	if (data->map)
 		free_split(data->map);
@@ -30,6 +30,7 @@ void	free_cub3d(t_cub3d	*data)
 		free(data->texts);
 	}
 	free(data);
+	get_next_line('1', 'f');
 }
 
 int	check_data_texture(t_cub3d	*data, char	*line)
@@ -39,7 +40,7 @@ int	check_data_texture(t_cub3d	*data, char	*line)
 			|| data->counters.nb_so_tex != 1 || data->counters.nb_we_tex != 1
 			|| data->counters.nb_ea_tex != 1 || data->counters.nb_flour != 1))
 	{
-		putstr_fd("Error\n invalid contents(wrong Order ||wrong Textures)\n",
+		putstr_fd("Error\n invalid contents(wrong Order || wrong Textures)\n",
 			2);
 		return (1);
 	}

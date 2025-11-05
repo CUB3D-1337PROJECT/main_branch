@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:34 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/31 14:35:38 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/05 17:59:52 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*ft_strnstr(const char	*str, const char	*substr, size_t len);
 int		ft_atoi(const char	*str);
 int		ft_isdigit(int c);
 int		parse_int(char	*s);
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, char f);
 int		check_data_texture(t_cub3d	*data, char	*line);
 int		count_elment(char	**str);
 int		parsing(int argc, char	**argv, t_cub3d	*data);
@@ -111,4 +111,5 @@ void	delete_textures(t_textures	*textures);
 void	delete_textures(t_textures	*textures);
 void	ft_append(t_list	**lst, char	*line);
 int		is_only_spaces(char	*line);
+int		check_img_extention(char *str, char *exten);
 #endif

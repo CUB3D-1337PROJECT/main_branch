@@ -1,4 +1,4 @@
-CC = cc
+CC = cc	#-fsanitize=address
 CFLAGS = -Wall -Wextra -Werror -I$(MLX_DIR) -I$(GLFW_DIR)/include
 MLX_DIR = /home/slakhrou/Desktop/MLX42/build
 GLFW_DIR = /home/slakhrou/Desktop/MLX42/glfw

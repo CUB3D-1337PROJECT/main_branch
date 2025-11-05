@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:59:06 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/15 18:27:48 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/05 19:32:43 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static	char	*extract_line(char	**next_line)
 	return (line);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, char f)
 {
 	static char	*next_line;
 	char		*returned_line;
@@ -100,6 +100,10 @@ char	*get_next_line(int fd)
 	{
 		free(next_line);
 		next_line = NULL;
+	}
+	if (f == 'f')
+	{
+		return (free(next_line), returned_line);
 	}
 	return (returned_line);
 }

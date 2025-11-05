@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 16:34:02 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/30 21:42:21 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/05 19:48:57 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	parse_textures(char	**line, int fd, t_cub3d	*data)
 		while (*line && is_empty(*line))
 		{
 			free(*line);
-			*line = get_next_line(fd);
+			*line = get_next_line(fd, '0');
 		}
 		if (!*line)
 			return (putstr_fd("Error\n no map found \n", 2), 1);
@@ -63,7 +63,7 @@ int	parse_textures(char	**line, int fd, t_cub3d	*data)
 			return (free(*line), free_split(splits), 1);
 		free_split(splits);
 		free(*line);
-		*line = get_next_line(fd);
+		*line = get_next_line(fd, '0');
 	}
 	return (0);
 }
@@ -72,7 +72,7 @@ int	parse_elements_map(int fd, t_cub3d	*data)
 {
 	char	*line;
 
-	line = get_next_line(fd);
+	line = get_next_line(fd, '0');
 	if (!line)
 	{
 		putstr_fd("Error\n invalid map file contents (empty) \n", 2);
@@ -107,7 +107,7 @@ int	check_extention(char *str, char *exten)
 		return (1);
 	if (ft_strcmp(str + len_str - len_ext, exten) != 0)
 	{
-		putstr_fd("Error\nInvalid map file type\n", 2);
+		putstr_fd("Error\nInvalid file extension\n", 2);
 		return (1);
 	}
 	return (0);

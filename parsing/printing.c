@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 17:43:10 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/16 15:34:34 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/05 15:31:53 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,22 @@ int	load_textures(t_cub3d	*data)
 	{
 		perror("Error\n");
 		return (delete_textures(data->texts), 1);
+	}
+	return (0);
+}
+
+int	check_img_extention(char *str, char *exten)
+{
+	int	len_str;
+	int	len_ext;
+
+	len_str = ft_strlen(str);
+	len_ext = ft_strlen(exten);
+	if (len_str < len_ext)
+		return (1);
+	if (ft_strcmp(str + len_str - len_ext, exten) != 0)
+	{
+		return (1);
 	}
 	return (0);
 }
