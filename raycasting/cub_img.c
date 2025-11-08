@@ -151,21 +151,12 @@ void raycasting(t_playerinfo *player, t_cub3d *data)
 {
     int x;
     
-    // --- Optimized buffer access ---
-    // Cast the pixel data to uint32_t* for direct 4-byte color writing
     uint32_t *pixel_buffer = (uint32_t *)data->img->pixels;
-    
-    // Check for null or size 0, though a valid mlx_image_t should be okay
     if (!pixel_buffer || data->img->width != WIDTH || data->img->height != HEIGHT)
         return; 
-    // -------------------------------
     
     x = 0;
     init_ray(&data->ray);
-    
-    // Before starting, it's a good practice to clear the screen (e.g., to black)
-    // if you don't render a floor/ceiling background.
-    // memset(pixel_buffer, 0, WIDTH * HEIGHT * sizeof(uint32_t)); 
 
     while (x < WIDTH)
     {
@@ -174,37 +165,23 @@ void raycasting(t_playerinfo *player, t_cub3d *data)
         perform_dda(data, &data->ray);
         calculate_line_height(&data->ray, data, player);
         
-        // --- Calculate wall color and texture offset (omitted here for brevity, 
-        //     but you'd calculate which texture pixel to use based on ray->wall_x) ---
-        
         int y = 0;
-        while (y < HEIGHT) // Loop through the entire height for background/floor/ceiling
+        while (y < HEIGHT)
         {
             uint32_t color;
 
             if (y < data->ray.start_draw)
-            {
-                // Ceiling color (e.g., light blue)
                 color = 0x87CEEBFF; 
-            }
             else if (y >= data->ray.draw_end)
-            {
-                // Floor color (e.g., dark gray)
                 color = 0x696969FF;
-            }
-            else // y is between start_draw and draw_end: Wall section
+            else 
             {
-                // Your wall coloring logic
                 if (data->ray.side == 0)
-                    color = 0xFF0000FF; // Red walls (vertical)
+                    color = 0xFF0000FF; 
                 else
-                    color = 0x00FF00FF; // Green walls (horizontal)
+                    color = 0x00FF00FF;
             }
-            
-            // --- Direct memory write ---
-            // The index in the 1D array is (y * WIDTH + x)
             pixel_buffer[y * WIDTH + x] = color;
-            // ---------------------------
             
             y++;
         }
