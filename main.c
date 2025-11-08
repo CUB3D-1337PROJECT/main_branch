@@ -27,10 +27,12 @@ static void cub_connection(t_cub3d *data)
 
 static void init_player_info(t_cub3d *data)
 {
-    data->player.pos_x = data->player_y;
-    data->player.pos_y = data->player_x;
+    data->player.pos_x = data->player_x ;
+    data->player.pos_y = data->player_y ;
 	if (data->player_view == 'S')
 	{
+		data->player.pos_x = data->player_x + 0.5;
+    	data->player.pos_y = data->player_y ;
 		data->player.dir_x = 0;
 		data->player.dir_y = 1;
 		data->player.plane_x = -0.66;
@@ -38,6 +40,8 @@ static void init_player_info(t_cub3d *data)
 	}
 	else if (data->player_view == 'N')
 	{
+		data->player.pos_x = data->player_x + 0.5;
+    	data->player.pos_y = data->player_y ;
 		data->player.dir_x = 0;
 		data->player.dir_y = -1;
 		data->player.plane_x = 0.66;
@@ -45,6 +49,8 @@ static void init_player_info(t_cub3d *data)
 	}
     else 	if (data->player_view == 'W')
 	{
+		data->player.pos_x = data->player_x ;
+    	data->player.pos_y = data->player_y + 0.5;
 		data->player.dir_x = -1;
 		data->player.dir_y = 0;
 		data->player.plane_x = 0;
@@ -52,6 +58,8 @@ static void init_player_info(t_cub3d *data)
 	}
 	else if (data->player_view == 'E')
 	{
+		data->player.pos_x = data->player_x ;
+    	data->player.pos_y = data->player_y + 0.5;
 		data->player.dir_x = 1;
 		data->player.dir_y = 0;
 		data->player.plane_x = 0;

@@ -17,7 +17,7 @@ static void init_raycasting(t_rayinfo *ray, int x, t_playerinfo *player)
 	ray->camera_x = 2 * x/(double)WIDTH -1;
 	ray->dir_x = player->dir_x + player->plane_x * ray->camera_x;
 	ray->dir_y = player->dir_y + player->plane_y * ray->camera_x;
-	ray->map_x = (int)player->pos_x;//
+	ray->map_x = (int)player->pos_x ;//
 	ray->map_y = (int)player->pos_y;//
 	ray->dest_x = fabs(1 / ray->dir_x);
 	ray->dest_y = fabs(1 / ray->dir_y);
@@ -114,38 +114,101 @@ static void	init_ray(t_rayinfo *ray)
 	ray->wall_x = 0;
 	ray->side = 0;
 	ray->line_h = 0;
-	ray->start_draw = 0;
-	ray->draw_end = 0;
+	// ray->start_draw = 0;
+	// ray->draw_end = 0;
 }
+
+// void raycasting(t_playerinfo *player, t_cub3d *data)
+// {
+// 	int x;
+
+// 	x = 0;
+// 	init_ray(&data->ray);
+	
+// 	while (x < WIDTH)
+// 	{
+// 		init_raycasting(&data->ray, x, player);
+// 		set_dda(&data->ray, player);
+// 		perform_dda(data, &data->ray);
+// 		calculate_line_height(&data->ray, data, player);
+// 		int y = data->ray.start_draw;
+// 		while (y < data->ray.draw_end)
+// 		{
+// 			uint32_t color; // temporary white walls
+
+// 			if (data->ray.side == 0)
+// 				color = 0xFF0000FF; // red walls (vertical)
+// 			else
+// 				color = 0x00FF00FF; // green walls (horizontal)
+// 			mlx_(data->img, x, y, color);
+// 			y++;
+// 		}
+// 		x++;
+// 	}
+// }
 
 void raycasting(t_playerinfo *player, t_cub3d *data)
 {
-	int x;
+    int x;
+    
+    // --- Optimized buffer access ---
+    // Cast the pixel data to uint32_t* for direct 4-byte color writing
+    uint32_t *pixel_buffer = (uint32_t *)data->img->pixels;
+    
+    // Check for null or size 0, though a valid mlx_image_t should be okay
+    if (!pixel_buffer || data->img->width != WIDTH || data->img->height != HEIGHT)
+        return; 
+    // -------------------------------
+    
+    x = 0;
+    init_ray(&data->ray);
+    
+    // Before starting, it's a good practice to clear the screen (e.g., to black)
+    // if you don't render a floor/ceiling background.
+    // memset(pixel_buffer, 0, WIDTH * HEIGHT * sizeof(uint32_t)); 
 
-	x = 0;
-	init_ray(&data->ray);
-	
-	while (x < WIDTH)
-	{
-		init_raycasting(&data->ray, x, player);
-		set_dda(&data->ray, player);
-		perform_dda(data, &data->ray);
-		printf("%i\n", data->ray.draw_end);
-		calculate_line_height(&data->ray, data, player);
-		int y = data->ray.start_draw;
-		while (y < data->ray.draw_end)
-		{
-			uint32_t color; // temporary white walls
+    while (x < WIDTH)
+    {
+        init_raycasting(&data->ray, x, player);
+        set_dda(&data->ray, player);
+        perform_dda(data, &data->ray);
+        calculate_line_height(&data->ray, data, player);
+        
+        // --- Calculate wall color and texture offset (omitted here for brevity, 
+        //     but you'd calculate which texture pixel to use based on ray->wall_x) ---
+        
+        int y = 0;
+        while (y < HEIGHT) // Loop through the entire height for background/floor/ceiling
+        {
+            uint32_t color;
 
-			if (data->ray.side == 0)
-				color = 0xFF0000FF; // red walls (vertical)
-			else
-				color = 0x00FF00FF; // green walls (horizontal)
-			mlx_put_pixel(data->img, x, y, color);
-
-			y++;
-		}
-
-		x++;
-	}
+            if (y < data->ray.start_draw)
+            {
+                // Ceiling color (e.g., light blue)
+                color = 0x87CEEBFF; 
+            }
+            else if (y >= data->ray.draw_end)
+            {
+                // Floor color (e.g., dark gray)
+                color = 0x696969FF;
+            }
+            else // y is between start_draw and draw_end: Wall section
+            {
+                // Your wall coloring logic
+                if (data->ray.side == 0)
+                    color = 0xFF0000FF; // Red walls (vertical)
+                else
+                    color = 0x00FF00FF; // Green walls (horizontal)
+            }
+            
+            // --- Direct memory write ---
+            // The index in the 1D array is (y * WIDTH + x)
+            pixel_buffer[y * WIDTH + x] = color;
+            // ---------------------------
+            
+            y++;
+        }
+        x++;
+    }
+	// mlx_image_to_window(data->mlx, data->img, 0, 0);
 }

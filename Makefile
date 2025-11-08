@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror
 MLX_DIR = ./MLX42
 MLXF = -I$(MLX_DIR)/include \
 		-L$(MLX_DIR)/build -lmlx42 \
-		-L$(MLX_DIR)/build/_deps/glfw-build/src -lglfw \
+		-L$(MLX_DIR)/build/_deps/glfw-build/src -lglfw3 \
 		-ldl -pthread -lm -lX11
 RM = rm -rf
 NAME = cub3D
