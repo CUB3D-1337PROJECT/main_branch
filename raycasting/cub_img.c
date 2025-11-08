@@ -150,8 +150,9 @@ static void	init_ray(t_rayinfo *ray)
 void raycasting(t_playerinfo *player, t_cub3d *data)
 {
     int x;
-    
-    uint32_t *pixel_buffer = (uint32_t *)data->img->pixels;
+    int y;
+    uint32_t *pixel_buffer;
+	pixel_buffer = (uint32_t *)data->img->pixels;
     if (!pixel_buffer || data->img->width != WIDTH || data->img->height != HEIGHT)
         return; 
     
@@ -164,12 +165,10 @@ void raycasting(t_playerinfo *player, t_cub3d *data)
         set_dda(&data->ray, player);
         perform_dda(data, &data->ray);
         calculate_line_height(&data->ray, data, player);
-        
-        int y = 0;
+        y = 0;
         while (y < HEIGHT)
         {
             uint32_t color;
-
             if (y < data->ray.start_draw)
                 color = 0x87CEEBFF; 
             else if (y >= data->ray.draw_end)
