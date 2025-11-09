@@ -11,7 +11,7 @@ SRC =	main.c	\
 		get_next_line/get_next_line.c	outils.c	functions.c\
 		parsing/parser.c	parsing/printing.c	parsing/parsing_map.c\
 		parsing/parsing_textures.c	parsing/hepler_functions.c\
-		parsing/map_functions.c	parsing/foutils.c\
+		parsing/map_functions.c	parsing/foutils.c	parsing/colors_texture.c\
 		ft_split.c	ft_atoi.c
 
 OBJ = $(SRC:.c=.o)

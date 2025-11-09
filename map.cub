@@ -1,10 +1,10 @@
-
+SO ./textures/paving.png
 WE ./textures/ReflectingTheLava.png
 
 EA ./textures/stone_wall.png
 
 NO ./textures/DesolatedHut.png
-SO ./textures/paving.png
+
 F 20,100,0
 C 225,30,0
 

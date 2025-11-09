@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:42:09 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/05 20:50:52 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/09 17:59:44 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ void	free_cub3d(t_cub3d	*data)
 		free(data->ea_tex);
 	if (data->map)
 		free_split(data->map);
+	if (data->flour)
+		free(data->flour);
+	if (data->ceiling)
+		free(data->ceiling);
 	if (data->texts)
 	{
 		delete_textures(data->texts);
