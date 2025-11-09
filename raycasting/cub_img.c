@@ -114,8 +114,8 @@ static void	init_ray(t_rayinfo *ray)
 	ray->wall_x = 0;
 	ray->side = 0;
 	ray->line_h = 0;
-	// ray->start_draw = 0;
-	// ray->draw_end = 0;
+	ray->start_draw = 0;
+	ray->draw_end = 0;
 }
 
 // void raycasting(t_playerinfo *player, t_cub3d *data)

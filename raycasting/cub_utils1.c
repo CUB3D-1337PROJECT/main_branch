@@ -26,10 +26,10 @@ static void callback(mlx_key_data_t keydata, void *param)
 		else if (keydata.key == MLX_KEY_W)
 			move_forward(data);
 	}
-	// if (keydata.key == MLX_KEY_RIGHT)
-	// 	rotate_right(data); // rotate right
-	// if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_REPEAT)
-	// 	rotate_left(data); // rotate left
+	if (keydata.key == MLX_KEY_RIGHT && keydata.action == 2)
+		rotate_right(data);
+	if (keydata.key == MLX_KEY_LEFT && keydata.action == 2)
+		rotate_left(data);
 	if (keydata.key == MLX_KEY_ESCAPE)
 		ft_clean(data, 0, 0, 0);
 }
