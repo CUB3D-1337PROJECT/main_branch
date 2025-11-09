@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:34 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/09 18:12:27 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/09 20:48:58 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <errno.h>
+//#include <stdint.h>
 
 # include "/home/slakhrou/Desktop/MLX42/include/MLX42/MLX42.h"
 
@@ -54,22 +55,22 @@ typedef struct s_textures
 
 typedef struct s_cub3d
 {
-	char		*no_tex;
-	char		*so_tex;
-	char		*ea_tex;
-	char		*we_tex;
-	int			*flour;
-	int			rgb_color_flour;
-	int			*ceiling;
-	int			rgb_color_ceiling;
-	t_count		counters;
-	char		**map;
-	t_textures	*texts;
-	int			map_length;
-	int			map_width;
-	int			player_x;
-	int			player_y;
-	char		player_view;
+	char			*no_tex;
+	char			*so_tex;
+	char			*ea_tex;
+	char			*we_tex;
+	int				*flour;
+	uint32_t		rgb_color_flour;
+	int				*ceiling;
+	uint32_t		rgb_color_ceiling;
+	t_count			counters;
+	char			**map;
+	t_textures		*texts;
+	int				map_length;
+	int				map_width;
+	int				player_x;
+	int				player_y;
+	char			player_view;
 }				t_cub3d;
 
 int		is_empty(char	*line);
