@@ -6,15 +6,15 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 18:10:24 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/09 18:13:46 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/10 18:14:35 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	create_trgb(int r, int g, int b)
+uint32_t	create_trgb(int r, int g, int b)
 {
-	return ((r << 16) | (g << 8) | b);
+	return (r << 24 | g << 16 | b << 8 | 255);
 }
 
 int	parse_rgb_values(char *color, int	**rgb)
