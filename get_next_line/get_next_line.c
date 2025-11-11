@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:59:06 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/05 19:32:43 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/11 16:02:52 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,5 @@ char	*get_next_line(int fd, char f)
 	{
 		return (free(next_line), returned_line);
 	}
+	return (returned_line);
 }

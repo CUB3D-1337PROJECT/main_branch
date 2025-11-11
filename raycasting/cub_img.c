@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_img.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spi <spi@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:12:21 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/11/07 17:58:47 by spi              ###   ########.fr       */
+/*   Updated: 2025/11/11 16:18:44 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void init_raycasting(t_rayinfo *ray, int x, t_playerinfo *player)
 	ray->map_y = (int)player->pos_y;
 	ray->dest_x = fabs(1 / ray->dir_x);
 	ray->dest_y = fabs(1 / ray->dir_y);
-} 
+}
 
 static void	set_dda(t_rayinfo *ray, t_playerinfo *player)
 {
@@ -67,7 +67,7 @@ static void	perform_dda(t_cub3d *data, t_rayinfo *ray)
 			ray->side = 1;
 		}
 		if (ray->map_y < 0 || ray->map_x < 0 ||
-			ray->map_y >= data->map_length 
+			ray->map_y >= data->map_length
 			|| ray->map_x >= data->map_width)
 			break;
 		else if (data->map[(int)ray->map_y][(int)ray->map_x] == '1')
@@ -75,7 +75,7 @@ static void	perform_dda(t_cub3d *data, t_rayinfo *ray)
 
 	}
 }
-	
+
 static void	calculate_line_height(t_rayinfo *ray, t_cub3d *data, t_playerinfo *player)
 {
 	(void)data;
@@ -124,7 +124,7 @@ static void	init_ray(t_rayinfo *ray)
 
 // 	x = 0;
 // 	init_ray(&data->ray);
-	
+
 // 	while (x < WIDTH)
 // 	{
 // 		init_raycasting(&data->ray, x, player);
@@ -154,8 +154,8 @@ void raycasting(t_playerinfo *player, t_cub3d *data)
     uint32_t *pixel_buffer;
 	pixel_buffer = (uint32_t *)data->img->pixels;
     if (!pixel_buffer || data->img->width != WIDTH || data->img->height != HEIGHT)
-        return; 
-    
+        return;
+
     x = 0;
     init_ray(&data->ray);
 
@@ -170,18 +170,18 @@ void raycasting(t_playerinfo *player, t_cub3d *data)
         {
             uint32_t color;
             if (y < data->ray.start_draw)
-                color = 0x87CEEBFF; 
+                color = data->rgb_color_ceiling;
             else if (y >= data->ray.draw_end)
-                color = 0x696969FF;
-            else 
+                color = data->rgb_color_flour;
+            else
             {
                 if (data->ray.side == 0)
-                    color = 0xFF0000FF; 
+                    color = 0xFFFFFFF0;
                 else
-                    color = 0x00FF00FF;
+                    color = 0xFFFFFF0F;
             }
             pixel_buffer[y * WIDTH + x] = color;
-            
+
             y++;
         }
         x++;
