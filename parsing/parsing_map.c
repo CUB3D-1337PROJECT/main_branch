@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:54:00 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/16 15:33:14 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/05 19:46:57 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,15 @@ int	check_empty_line_in_map(int fd, char	*line)
 		while (line && is_empty(line))
 		{
 			free(line);
-			line = get_next_line(fd);
+			line = get_next_line(fd, '0');
 		}
-		if (line && !is_not_map(line))
+		if (line && !is_not_map(line) && !is_only_spaces(line))
 		{
 			putstr_fd("Error\nInvalid map: empty line inside map\n", 2);
 			free(line);
 			return (1);
 		}
-		else if (line && is_not_map(line))
+		else if (line && is_not_map(line) && !is_only_spaces(line))
 		{
 			putstr_fd("Error\n wrong content after map\n", 2);
 			free(line);
@@ -125,12 +125,12 @@ int	parse_map(char *line, int fd, t_cub3d *data)
 	count = 0;
 	while (line)
 	{
-		if (is_not_map(line))
+		if (is_not_map(line) && !is_only_spaces(line))
 			break ;
 		ft_append(&lst, line);
 		count++;
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(fd, '0');
 	}
 	if (check_empty_line_in_map(fd, line))
 		return (free_list(&lst), 1);

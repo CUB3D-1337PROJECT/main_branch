@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 16:34:02 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/16 16:14:36 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/05 19:48:57 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_not_map(char *s)
 	{
 		if (!ft_strchr(" 01NSEW\t", s[i]))
 			return (1);
-		if (ft_strchr("01NSEW", s[i]))
+		if (ft_strchr(" 01NSEW", s[i]))
 			has_valid_char = 1;
 		i++;
 	}
@@ -47,25 +47,23 @@ int	parse_textures(char	**line, int fd, t_cub3d	*data)
 
 	while (*line && is_not_map(*line))
 	{
-		while (is_empty(*line))
+		while (*line && is_empty(*line))
 		{
 			free(*line);
-			*line = get_next_line(fd);
+			*line = get_next_line(fd, '0');
 		}
+		if (!*line)
+			return (putstr_fd("Error\n no map found \n", 2), 1);
 		if (!is_not_map(*line))
 			break ;
 		splits = ft_split(*line, " \n\t");
 		if (!splits)
-		{
-			free(*line);
-			putstr_fd("Error\n split failed\n", 2);
-			return (1);
-		}
+			return (putstr_fd("Error\n split failed\n", 2), free(*line), 1);
 		if (fill_texture(*line, splits, data))
 			return (free(*line), free_split(splits), 1);
 		free_split(splits);
 		free(*line);
-		*line = get_next_line(fd);
+		*line = get_next_line(fd, '0');
 	}
 	return (0);
 }
@@ -74,10 +72,10 @@ int	parse_elements_map(int fd, t_cub3d	*data)
 {
 	char	*line;
 
-	line = get_next_line(fd);
+	line = get_next_line(fd, '0');
 	if (!line)
 	{
-		putstr_fd("Error\n invalid map file contents \n", 2);
+		putstr_fd("Error\n invalid map file contents (empty) \n", 2);
 		return (1);
 	}
 	if (!is_not_map(line))
@@ -88,7 +86,7 @@ int	parse_elements_map(int fd, t_cub3d	*data)
 	}
 	if (parse_textures(&line, fd, data))
 		return (1);
-	if (check_data_texture(data))
+	if (check_data_texture(data, line))
 		return (free(line), 1);
 	if (!is_not_map(line))
 	{
@@ -109,7 +107,7 @@ int	check_extention(char *str, char *exten)
 		return (1);
 	if (ft_strcmp(str + len_str - len_ext, exten) != 0)
 	{
-		putstr_fd("Error\nInvalid map file type\n", 2);
+		putstr_fd("Error\nInvalid file extension\n", 2);
 		return (1);
 	}
 	return (0);

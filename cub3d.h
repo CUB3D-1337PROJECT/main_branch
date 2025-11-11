@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spi <spi@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:34 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/07 13:29:15 by spi              ###   ########.fr       */
+/*   Updated: 2025/11/09 20:48:58 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <errno.h>
+# include "/home/slakhrou/Desktop/MLX42/include/MLX42/MLX42.h"
 #include <math.h>
-# include "MLX42/include/MLX42/MLX42.h"
+//# include "MLX42/include/MLX42/MLX42.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE	25
 # endif
-
 #define HEIGHT 600
 #define WIDTH 800
 #define BLOCK_SIZE 64
@@ -45,11 +45,6 @@ typedef struct s_playerinfo
 	double	plane_x;
 
 } t_playerinfo;
-
-// typedef struct s_mapinfo
-// {
-
-// } t_mapinfo;
 
 typedef struct  s_rayinfo
 {
@@ -73,19 +68,6 @@ typedef struct  s_rayinfo
 	int	side;
     mlx_image_t *playerv_img;
 } t_rayinfo;
-
-// typedef struct s_cub_data
-// {
-//     mlx_t *mlx; //
-//     mlx_image_t *img;
-//     mlx_texture_t *tex;
-//     mlx_image_t *img_tex;
-//     char	**map;
-//     // t_mapinfo	map;
-// } t_cub_data;
-
-/// parse
-
 typedef struct s_list
 {
 	char			*line;
@@ -122,7 +104,9 @@ typedef struct s_cub3d
 	char			*ea_tex;
 	char			*we_tex;
 	int				*flour;
+	uint32_t		rgb_color_flour;
 	int				*ceiling;
+	uint32_t		rgb_color_ceiling;
 	t_count			counters;
 	char			**map;
 	t_textures		*texts;
@@ -153,13 +137,14 @@ char	*ft_strnstr(const char	*str, const char	*substr, size_t len);
 int		ft_atoi(const char	*str);
 int		ft_isdigit(int c);
 int		parse_int(char	*s);
-char	*get_next_line(int fd);
-int		check_data_texture(t_cub3d	*data);
+char	*get_next_line(int fd, char f);
+int		check_data_texture(t_cub3d	*data, char	*line);
 int		count_elment(char	**str);
 int		parsing(int argc, char	**argv, t_cub3d	*data);
 int		check_extention(char	*str, char	*exten);
 int		fill_texture(char	*line, char	**splits, t_cub3d	*data);
-int		check_rgb(char	**split_colors, int rgb[3]);
+int		check_rgb(char	**split_colors, int rgb[3], char	*color);
+int		check_two_commas(char	*color);
 char	*find_identifier(char	*first_split);
 int		parse_map(char	*line, int fd, t_cub3d	*data);
 int		get_max_width(t_list	*lst);
@@ -172,14 +157,18 @@ int		load_textures(t_cub3d	*data);
 void	delete_textures(t_textures	*textures);
 void	delete_textures(t_textures	*textures);
 void	ft_append(t_list	**lst, char	*line);
-void cub_handel_events(t_cub3d *data);
-void move_right(t_cub3d *data);
-void move_left(t_cub3d *data);
-void move_forward(t_cub3d *data);
-void move_backward(t_cub3d *data);
-void rotate_right(t_cub3d *data);
-void rotate_left(t_cub3d *data);
-void ft_clean(t_cub3d *data, char *err_type, char *err_msg, int err_exit);
-void raycasting(t_playerinfo *player, t_cub3d *data);
+int		is_only_spaces(char	*line);
+int		check_img_extention(char *str, char *exten);
+int		create_trgb(int r, int g, int b);
+int		parse_rgb_values(char *color, int	**rgb);
+void  cub_handel_events(t_cub3d *data);
+void  move_right(t_cub3d *data);
+void  move_left(t_cub3d *data);
+void  move_forward(t_cub3d *data);
+void  move_backward(t_cub3d *data);
+void  rotate_right(t_cub3d *data);
+void  rotate_left(t_cub3d *data);
+void  ft_clean(t_cub3d *data, char *err_type, char *err_msg, int err_exit);
+void  raycasting(t_playerinfo *player, t_cub3d *data);
 
 #endif

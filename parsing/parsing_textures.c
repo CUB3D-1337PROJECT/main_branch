@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:54:14 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/16 16:17:38 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/09 19:52:55 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,37 +62,45 @@ static int	fill_data_texture(char	*ident, char	*path_texture,
 
 	fd = open(path_texture, O_RDONLY);
 	if (fd < 0)
-		return (perror("Error\n can't open texture\n"), 1);
+		return (perror("Error\n can't open texture"), 1);
+	else if (check_img_extention(path_texture, ".png")
+		&& check_img_extention(path_texture, ".xpm"))
+	{
+		putstr_fd("Error\n can't open texture (no textures found)\n", 2);
+		close(fd);
+		return (1);
+	}
 	close(fd);
 	if (assign_texture(ident, path_texture, data))
 		return (1);
 	return (0);
 }
 
-static int	fill_data_colors(char	*ident, char	*color, t_cub3d	*data)
+static int	fill_data_colors(char *ident, char *color, t_cub3d *data)
 {
-	char	**split_colors;
-	int		rgb[3];
+	int	*rgb;
 
-	split_colors = ft_split(color, ",");
-	if (!split_colors)
+	rgb = NULL;
+	if (parse_rgb_values(color, &rgb))
 		return (1);
-	if (count_elment(split_colors) != 3 || check_rgb(split_colors, rgb))
-		return (free_split(split_colors),
-			putstr_fd("Error\n wrong in rgb colors\n", 2), 1);
 	if (!ft_strcmp(ident, "F"))
 	{
 		if (!data->flour)
+		{
 			data->flour = rgb;
+			data->rgb_color_flour = create_trgb(rgb[0], rgb[1], rgb[2]);
+		}
 		data->counters.nb_flour++;
 	}
 	else if (!ft_strcmp(ident, "C"))
 	{
 		if (!data->ceiling)
+		{
 			data->ceiling = rgb;
+			data->rgb_color_ceiling = create_trgb(rgb[0], rgb[1], rgb[2]);
+		}
 		data->counters.nb_ceiling++;
 	}
-	free_split(split_colors);
 	return (0);
 }
 
@@ -103,7 +111,8 @@ int	fill_texture(char	*line, char	**splits, t_cub3d	*data)
 
 	count = count_elment(splits);
 	if (count != 2 && splits[0])
-		return (putstr_fd("Error\n wrong texture\n", 2), 1);
+		return (putstr_fd(
+				"Error\n Invalid line ( not texture and not map)\n", 2), 1);
 	ident = find_identifier(splits[0]);
 	if (!ident)
 		return (putstr_fd("Error\n wrong texture identifier\n", 2), 1);
