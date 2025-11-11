@@ -6,7 +6,7 @@
 /*   By: spi <spi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:12:21 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/10/25 22:04:26 by spi              ###   ########.fr       */
+/*   Updated: 2025/11/07 17:58:47 by spi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,10 @@
 
 static void init_raycasting(t_rayinfo *ray, int x, t_playerinfo *player)
 {
-	ray->dir_x = 0;
-	ray->dir_y = 0;
-	ray->camera_x = 0;
-	player->dir_x = -1;
-	player->dir_y = 0;
 	ray->camera_x = 2 * x/(double)WIDTH -1;
 	ray->dir_x = player->dir_x + player->plane_x * ray->camera_x;
 	ray->dir_y = player->dir_y + player->plane_y * ray->camera_x;
-	ray->map_x = (int)player->pos_x;
+	ray->map_x = (int)player->pos_x ;
 	ray->map_y = (int)player->pos_y;
 	ray->dest_x = fabs(1 / ray->dir_x);
 	ray->dest_y = fabs(1 / ray->dir_y);
@@ -102,33 +97,94 @@ static void	calculate_line_height(t_rayinfo *ray, t_cub3d *data, t_playerinfo *p
 	ray->wall_x -= floor(ray->wall_x);
 }
 
+static void	init_ray(t_rayinfo *ray)
+{
+	ray->camera_x = 0;
+	ray->dir_x = 0;
+	ray->dir_y = 0;
+	ray->map_x = 0;
+	ray->map_y = 0;
+	ray->step_x = 0;
+	ray->step_y = 0;
+	ray->sidedist_x = 0;
+	ray->sidedist_y = 0;
+	ray->dest_x = 0;
+	ray->dest_y = 0;
+	ray->wall_dest = 0;
+	ray->wall_x = 0;
+	ray->side = 0;
+	ray->line_h = 0;
+	ray->start_draw = 0;
+	ray->draw_end = 0;
+}
+
+// void raycasting(t_playerinfo *player, t_cub3d *data)
+// {
+// 	int x;
+
+// 	x = 0;
+// 	init_ray(&data->ray);
+	
+// 	while (x < WIDTH)
+// 	{
+// 		init_raycasting(&data->ray, x, player);
+// 		set_dda(&data->ray, player);
+// 		perform_dda(data, &data->ray);
+// 		calculate_line_height(&data->ray, data, player);
+// 		int y = data->ray.start_draw;
+// 		while (y < data->ray.draw_end)
+// 		{
+// 			uint32_t color; // temporary white walls
+
+// 			if (data->ray.side == 0)
+// 				color = 0xFF0000FF; // red walls (vertical)
+// 			else
+// 				color = 0x00FF00FF; // green walls (horizontal)
+// 			mlx_(data->img, x, y, color);
+// 			y++;
+// 		}
+// 		x++;
+// 	}
+// }
 
 void raycasting(t_playerinfo *player, t_cub3d *data)
 {
-	t_rayinfo *ray = &data->ray;
-	int x;
+    int x;
+    int y;
+    uint32_t *pixel_buffer;
+	pixel_buffer = (uint32_t *)data->img->pixels;
+    if (!pixel_buffer || data->img->width != WIDTH || data->img->height != HEIGHT)
+        return; 
+    
+    x = 0;
+    init_ray(&data->ray);
 
-	x = 0;
-	while (x < WIDTH)
-	{
-		init_raycasting(ray, x, player);
-		set_dda(ray, player);
-		perform_dda(data, ray);
-		calculate_line_height(ray, data, player);
-		int y = ray->start_draw;
-		while (y < ray->draw_end)
-		{
-			uint32_t color; // temporary white walls
-
-			if (ray->side == 0)
-				color = 0xFF0000FF; // red walls (vertical)
-			else
-				color = 0x00FF00FF; // green walls (horizontal)
-			mlx_put_pixel(data->img, x, y, color);
-
-			y++;
-		}
-
-		x++;
-	}
+    while (x < WIDTH)
+    {
+        init_raycasting(&data->ray, x, player);
+        set_dda(&data->ray, player);
+        perform_dda(data, &data->ray);
+        calculate_line_height(&data->ray, data, player);
+        y = 0;
+        while (y < HEIGHT)
+        {
+            uint32_t color;
+            if (y < data->ray.start_draw)
+                color = 0x87CEEBFF; 
+            else if (y >= data->ray.draw_end)
+                color = 0x696969FF;
+            else 
+            {
+                if (data->ray.side == 0)
+                    color = 0xFF0000FF; 
+                else
+                    color = 0x00FF00FF;
+            }
+            pixel_buffer[y * WIDTH + x] = color;
+            
+            y++;
+        }
+        x++;
+    }
+	// mlx_image_to_window(data->mlx, data->img, 0, 0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: spi <spi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:34 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/16 15:03:09 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/07 13:29:15 by spi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,21 +172,14 @@ int		load_textures(t_cub3d	*data);
 void	delete_textures(t_textures	*textures);
 void	delete_textures(t_textures	*textures);
 void	ft_append(t_list	**lst, char	*line);
-
 void cub_handel_events(t_cub3d *data);
-// void cub_create_pimg(cub_data_t *data);
-// void cub_creat_pvimg(cub_data_t *data);
 void move_right(t_cub3d *data);
 void move_left(t_cub3d *data);
-// void move_forward(cub_data_t *data);
-// void move_backward(cub_data_t *data);
-// void rotate_right(cub_data_t *data);
-// void rotate_left(cub_data_t *data);
-char **cub_set_map(void);
-void cub_draw_map(t_cub3d *data);
-void draw_map(t_cub3d *data);
-// void cub_draw_map2(cub_data_t *data);
-
+void move_forward(t_cub3d *data);
+void move_backward(t_cub3d *data);
+void rotate_right(t_cub3d *data);
+void rotate_left(t_cub3d *data);
 void ft_clean(t_cub3d *data, char *err_type, char *err_msg, int err_exit);
 void raycasting(t_playerinfo *player, t_cub3d *data);
+
 #endif
