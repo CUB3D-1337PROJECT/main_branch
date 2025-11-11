@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:59:00 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/11/11 16:42:04 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/11 18:05:46 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void move_right(t_cub3d *data)
 {
 	double 	MOVESPEED;
 
-	MOVESPEED = 0.19;
+	MOVESPEED = 0.20;
 	if (!is_wall(data,  data->player.pos_x - data->player.dir_y * MOVESPEED,
 			data->player.pos_y + data->player.dir_x * MOVESPEED))
 	{
@@ -39,7 +39,7 @@ void move_left(t_cub3d *data)
 {
 	double 	MOVESPEED;
 
-	MOVESPEED = 0.19;
+	MOVESPEED = 0.20;
 	if (!is_wall(data, data->player.pos_x + data->player.dir_y * MOVESPEED,
 			data->player.pos_y - data->player.dir_x * MOVESPEED))
 	{
@@ -52,12 +52,16 @@ void move_forward(t_cub3d *data)
 {
 	double 	MOVESPEED;
 
-	MOVESPEED = 0.19;
+	MOVESPEED = 0.20;
 	if (!is_wall(data, data->player.pos_x + data->player.dir_x * MOVESPEED,
+			data->player.pos_y))
+	{
+		data->player.pos_x = data->player.pos_x + data->player.dir_x * MOVESPEED;
+	}
+	if (!is_wall(data, data->player.pos_x,
 			data->player.pos_y + data->player.dir_y * MOVESPEED))
 	{
 		data->player.pos_y = data->player.pos_y + data->player.dir_y * MOVESPEED;
-		data->player.pos_x = data->player.pos_x + data->player.dir_x * MOVESPEED;
 	}
 	raycasting(&data->player, data);
 }
@@ -66,7 +70,7 @@ void move_backward(t_cub3d *data)
 {
 	double 	MOVESPEED;
 
-	MOVESPEED = 0.19;
+	MOVESPEED = 0.20;
 	if (!is_wall(data, data->player.pos_x - data->player.dir_x * MOVESPEED,
 	 	data->player.pos_y - data->player.dir_y * MOVESPEED))
 	{

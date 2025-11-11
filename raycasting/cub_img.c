@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:12:21 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/11/11 16:18:44 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/11 17:43:07 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,5 +186,5 @@ void raycasting(t_playerinfo *player, t_cub3d *data)
         }
         x++;
     }
-	// mlx_image_to_window(data->mlx, data->img, 0, 0);
+	mlx_image_to_window(data->mlx, data->img, 0, 0);
 }
