@@ -20,14 +20,54 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <errno.h>
-//#include <stdint.h>
-
 # include "/home/slakhrou/Desktop/MLX42/include/MLX42/MLX42.h"
+#include <math.h>
+//# include "MLX42/include/MLX42/MLX42.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE	25
 # endif
+#define HEIGHT 600
+#define WIDTH 800
+#define BLOCK_SIZE 64
+#define XMIN 0
 
+typedef struct s_playerinfo
+{
+
+    mlx_image_t *player_img;
+    char	dir;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_y;
+	double	plane_x;
+
+} t_playerinfo;
+
+typedef struct  s_rayinfo
+{
+    double	dir_x;
+	double	dir_y;
+	double	camera_x;
+	double	camera_y;
+	double	map_x;
+	double	map_y;
+	double	dest_x;
+	double	dest_y;
+	double	step_x;
+	double	step_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	double	wall_dest;
+	double	wall_x;
+	int	line_h;
+	int	start_draw;
+	int	draw_end;
+	int	side;
+    mlx_image_t *playerv_img;
+} t_rayinfo;
 typedef struct s_list
 {
 	char			*line;
@@ -55,6 +95,10 @@ typedef struct s_textures
 
 typedef struct s_cub3d
 {
+	mlx_t			*mlx;
+    mlx_image_t		*img;
+	t_playerinfo	player;
+	t_rayinfo		ray;
 	char			*no_tex;
 	char			*so_tex;
 	char			*ea_tex;
@@ -117,4 +161,14 @@ int		is_only_spaces(char	*line);
 int		check_img_extention(char *str, char *exten);
 int		create_trgb(int r, int g, int b);
 int		parse_rgb_values(char *color, int	**rgb);
+void  cub_handel_events(t_cub3d *data);
+void  move_right(t_cub3d *data);
+void  move_left(t_cub3d *data);
+void  move_forward(t_cub3d *data);
+void  move_backward(t_cub3d *data);
+void  rotate_right(t_cub3d *data);
+void  rotate_left(t_cub3d *data);
+void  ft_clean(t_cub3d *data, char *err_type, char *err_msg, int err_exit);
+void  raycasting(t_playerinfo *player, t_cub3d *data);
+
 #endif

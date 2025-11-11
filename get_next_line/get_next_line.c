@@ -105,5 +105,4 @@ char	*get_next_line(int fd, char f)
 	{
 		return (free(next_line), returned_line);
 	}
-	return (returned_line);
 }
