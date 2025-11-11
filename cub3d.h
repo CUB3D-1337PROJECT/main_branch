@@ -172,7 +172,6 @@ int		load_textures(t_cub3d	*data);
 void	delete_textures(t_textures	*textures);
 void	delete_textures(t_textures	*textures);
 void	ft_append(t_list	**lst, char	*line);
-
 void cub_handel_events(t_cub3d *data);
 void move_right(t_cub3d *data);
 void move_left(t_cub3d *data);

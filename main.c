@@ -69,7 +69,6 @@ static void init_player_info(t_cub3d *data)
 		return ;
 }
 
-
 int main(int argc, char **argv)
 {
     t_cub3d *data = ft_calloc(1, sizeof(t_cub3d));
