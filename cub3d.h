@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:34 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/11 16:06:06 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/12 17:24:26 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,9 @@ void	ft_append(t_list	**lst, char	*line);
 int		is_only_spaces(char	*line);
 int			check_img_extention(char *str, char *exten);
 uint32_t	create_trgb(int r, int g, int b);
-int		parse_rgb_values(char *color, int	**rgb);
+int		parse_rgb_values(char	*color, int	**rgb);
+void	assign_floor_color(int	*rgb, t_cub3d	*data);
+void	assign_ceiling_color(int	*rgb, t_cub3d	*data);
 void  	cub_handel_events(t_cub3d *data);
 void  	move_right(t_cub3d *data);
 void  	move_left(t_cub3d *data);
