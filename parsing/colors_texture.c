@@ -2,19 +2,19 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   colors_texture.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*                                                    +:+ +:+         +:+     
+/*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 18:10:24 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/17 15:35:34 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/21 13:52:39 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-uint32_t	create_trgb(int r, int g, int b,int a)
+uint32_t	create_trgb(int r, int g, int b)
 {
-	return ((uint32_t)r << 24 | (uint32_t)g << 16 | (uint32_t)b << 8 | (uint32_t)a);
+	return (r << 24 | g << 16 | b << 8 | 255);
 }
 
 int	parse_rgb_values(char *color, int	**rgb)
@@ -47,7 +47,7 @@ void	assign_floor_color(int *rgb, t_cub3d *data)
 	if (!data->flour)
 	{
 		data->flour = rgb;
-		data->rgb_color_flour = create_trgb(rgb[0], rgb[1], rgb[2], 255);
+		data->rgb_color_flour = create_trgb(rgb[0], rgb[1], rgb[2]);
 	}
 	else
 		free(rgb);
@@ -59,7 +59,7 @@ void	assign_ceiling_color(int *rgb, t_cub3d *data)
 	if (!data->ceiling)
 	{
 		data->ceiling = rgb;
-		data->rgb_color_ceiling = create_trgb(rgb[0], rgb[1], rgb[2], 255);
+		data->rgb_color_ceiling = create_trgb(rgb[0], rgb[1], rgb[2]);
 	}
 	else
 		free(rgb);

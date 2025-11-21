@@ -28,15 +28,15 @@ MLXF = -I$(MLX_DIR)/include \
 # -ldl -pthread -lm -lX11
 
 RM = rm -rf
-NAME = cub3D
+NAME
 # // maiin
 SRC =	main.c	\
 		get_next_line/get_next_line.c	outils.c	functions.c\
 		parsing/parser.c	parsing/printing.c	parsing/parsing_map.c\
 		parsing/parsing_textures.c	parsing/hepler_functions.c\
-    	parsing/colors_texture.c parsing/map_functions.c	parsing/foutils.c\
-    	raycasting/clean.c raycasting/cub_img.c raycasting/cub_moves.c\
-    	raycasting/cub_rotate.c raycasting/cub_utils1.c raycasting/dda_algo.c\
+    parsing/colors_texture.c parsing/map_functions.c	parsing/foutils.c\
+    raycasting/clean.c raycasting/cub_img.c raycasting/cub_moves.c\
+    raycasting/cub_rotate.c raycasting/cub_utils1.c raycasting/dda_algo.c\
 		ft_split.c	ft_atoi.c
 
 OBJ = $(SRC:.c=.o)
@@ -68,17 +68,45 @@ OBJ = $(SRC:.c=.o)
 # // reflix
 all : $(NAME)
 
-$(NAME) : $(OBJ)
-	$(CC)	$(CFLAGS)	$(OBJ)	$(MLXF)	-o $(NAME)
 
-%.o : %.c	cub3d.h
-	$(CC)	$(CFLAGS)	-c	$< -o $@
+all:$(NAME)
 
-clean :
-	$(RM)	$(OBJ)
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(MLXF) -o $(NAME)
 
-fclean : clean
-	$(RM)	$(NAME)
+%.o: %.c cub3d.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
-re : fclean	all
-# // main
+$(GLFW_DIR)/build/src/libglfw3.a:
+	cmake -S $(GLFW_DIR) -B $(GLFW_DIR)/build
+	cmake --build $(GLFW_DIR)/build
+
+$(MLX_DIR)/libmlx42.a:
+	cmake -B $(MLX_DIR) -S	/home/slakhrou/Desktop/MLX42
+	cmake -C	$(MLX_DIR)
+
+clean:
+	$(RM) $(OBJ)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all
+
+
+# all : $(NAME)
+
+# $(NAME) : $(OBJ)
+# 	$(CC)	$(CFLAGS)	$(OBJ)	$(MLXF)	-o $(NAME)
+
+# %.o : %.c	cub3d.h
+# 	$(CC)	$(CFLAGS)	-c	$< -o $@
+
+# clean :
+# 	$(RM)	$(OBJ)
+
+# fclean : clean
+# 	$(RM)	$(NAME)
+# re : fclean	all
+# # // main
+

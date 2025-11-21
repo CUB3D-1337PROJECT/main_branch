@@ -20,7 +20,6 @@ void rotate_right(t_cub3d *data)
 	double old_dir_x;
 	old_plan_x = data->player.plane_x;
 	old_dir_x = data->player.dir_x;
-    printf("%f\n%f\n", cos(rotangeR), sin(rotangeR));
 	data->player.dir_x  = old_dir_x * cos(rotangeR) - data->player.dir_y * sin(rotangeR);
 	data->player.dir_y  = data->player.dir_y * cos(rotangeR) + old_dir_x * sin(rotangeR);
 	data->player.plane_x  = old_plan_x * cos(rotangeR) - data->player.plane_y * sin(rotangeR);

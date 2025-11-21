@@ -3,10 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:34 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/17 15:02:40 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/21 13:55:12 by slakhrou         ###   ########.fr       */
+
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +23,7 @@
 # include <errno.h>
 // # include "/home/slakhrou/Desktop/MLX42/include/MLX42/MLX42.h"
 #include <math.h>
-# include "MLX42/include/MLX42/MLX42.h"
+//# include "MLX42/include/MLX42/MLX42.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE	25
@@ -35,8 +36,8 @@
 typedef struct s_playerinfo
 {
 
-    mlx_image_t *player_img;
-    char	dir;
+  mlx_image_t *player_img;
+  char	dir;
 	double	pos_x;
 	double	pos_y;
 	double	dir_x;
