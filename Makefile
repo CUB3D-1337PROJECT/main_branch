@@ -28,7 +28,7 @@ MLXF = -I$(MLX_DIR)/include \
 # -ldl -pthread -lm -lX11
 
 RM = rm -rf
-NAME
+NAME = cub3D
 # // maiin
 SRC =	main.c	\
 		get_next_line/get_next_line.c	outils.c	functions.c\
