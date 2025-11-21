@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:54:14 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/09 19:52:55 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/21 13:55:54 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,27 +80,12 @@ static int	fill_data_colors(char *ident, char *color, t_cub3d *data)
 {
 	int	*rgb;
 
-	rgb = NULL;
 	if (parse_rgb_values(color, &rgb))
 		return (1);
 	if (!ft_strcmp(ident, "F"))
-	{
-		if (!data->flour)
-		{
-			data->flour = rgb;
-			data->rgb_color_flour = create_trgb(rgb[0], rgb[1], rgb[2]);
-		}
-		data->counters.nb_flour++;
-	}
+		assign_floor_color(rgb, data);
 	else if (!ft_strcmp(ident, "C"))
-	{
-		if (!data->ceiling)
-		{
-			data->ceiling = rgb;
-			data->rgb_color_ceiling = create_trgb(rgb[0], rgb[1], rgb[2]);
-		}
-		data->counters.nb_ceiling++;
-	}
+		assign_ceiling_color(rgb, data);
 	return (0);
 }
 

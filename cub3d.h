@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:34 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/11 16:06:06 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/21 13:55:12 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <errno.h>
-// # include "/home/slakhrou/Desktop/MLX42/include/MLX42/MLX42.h"
+ # include "/home/slakhrou/Desktop/MLX42/include/MLX42/MLX42.h"
 #include <math.h>
-# include "MLX42/include/MLX42/MLX42.h"
+//# include "MLX42/include/MLX42/MLX42.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE	25
@@ -68,6 +68,7 @@ typedef struct  s_rayinfo
 	int	side;
     mlx_image_t *playerv_img;
 } t_rayinfo;
+
 typedef struct s_list
 {
 	char			*line;
@@ -160,15 +161,17 @@ void	ft_append(t_list	**lst, char	*line);
 int		is_only_spaces(char	*line);
 int			check_img_extention(char *str, char *exten);
 uint32_t	create_trgb(int r, int g, int b);
-int		parse_rgb_values(char *color, int	**rgb);
-void  	cub_handel_events(t_cub3d *data);
-void  	move_right(t_cub3d *data);
-void  	move_left(t_cub3d *data);
-void  	move_forward(t_cub3d *data);
-void  	move_backward(t_cub3d *data);
-void  	rotate_right(t_cub3d *data);
-void  	rotate_left(t_cub3d *data);
-void  	ft_clean(t_cub3d *data, char *err_type, char *err_msg, int err_exit);
-void  	raycasting(t_playerinfo *player, t_cub3d *data);
+int		parse_rgb_values(char	*color, int	**rgb);
+void	assign_floor_color(int	*rgb, t_cub3d	*data);
+void	assign_ceiling_color(int	*rgb, t_cub3d	*data);
+void	cub_handel_events(t_cub3d *data);
+void	move_right(t_cub3d *data);
+void	move_left(t_cub3d *data);
+void	move_forward(t_cub3d *data);
+void	move_backward(t_cub3d *data);
+void	rotate_right(t_cub3d *data);
+void	rotate_left(t_cub3d *data);
+void	ft_clean(t_cub3d *data, char *err_type, char *err_msg, int err_exit);
+void	raycasting(t_playerinfo *player, t_cub3d *data);
 
 #endif

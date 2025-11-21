@@ -1,26 +1,26 @@
 # // slakhrou
 CC = cc	#-fsanitize=address
-# CFLAGS = -Wall -Wextra -Werror -I$(MLX_DIR) -I$(GLFW_DIR)/include
-# MLX_DIR = /home/slakhrou/Desktop/MLX42/build
-# GLFW_DIR = /home/slakhrou/Desktop/MLX42/glfw
-# MLXF = -L$(MLX_DIR) -lmlx42 -L$(GLFW_DIR)/build/src -lglfw3 -lX11 -lXext -lm
-
-# RM = rm -rf
-# NAME = cub3D
-
-# //reflix
-# CC = cc
-CFLAGS = -Wall -Wextra -Werror
-MLX_DIR = ./MLX42
-MLXF = -I$(MLX_DIR)/include \
-		-L$(MLX_DIR)/build -lmlx42\
-		-L/goinfre/lhchiban/homebrew/lib -lglfw3 \
-		-framework Cocoa -framework OpenGL -framework IOKit
-
-# -ldl -pthread -lm -lX11
+CFLAGS = -Wall -Wextra -Werror -I$(MLX_DIR) -I$(GLFW_DIR)/include
+MLX_DIR = /home/slakhrou/Desktop/MLX42/build
+GLFW_DIR = /home/slakhrou/Desktop/MLX42/glfw
+MLXF = -L$(MLX_DIR) -lmlx42 -L$(GLFW_DIR)/build/src -lglfw3 -lX11 -lXext -lm
 
 RM = rm -rf
 NAME = cub3D
+
+# //reflix
+# CC = cc
+# CFLAGS = -Wall -Wextra -Werror
+# MLX_DIR = ./MLX42
+# MLXF = -I$(MLX_DIR)/include \
+# 		-L$(MLX_DIR)/build -lmlx42\
+# 		-L/goinfre/lhchiban/homebrew/lib -lglfw3 \
+# 		-framework Cocoa -framework OpenGL -framework IOKit
+
+# -ldl -pthread -lm -lX11
+
+# RM = rm -rf
+# NAME = cub3D
 # // maiin
 SRC =	main.c	\
 		get_next_line/get_next_line.c	outils.c	functions.c\
@@ -33,44 +33,45 @@ SRC =	main.c	\
 
 OBJ = $(SRC:.c=.o)
 
-# // slakhrou
-# all:$(NAME)
 
-# $(NAME): $(OBJ)
-# 	$(CC) $(CFLAGS) $(OBJ) $(MLXF) -o $(NAME)
+all:$(NAME)
 
-# %.o: %.c cub3d.h
-# 	$(CC) $(CFLAGS) -c $< -o $@
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(MLXF) -o $(NAME)
 
-# $(GLFW_DIR)/build/src/libglfw3.a:
-# 	cmake -S $(GLFW_DIR) -B $(GLFW_DIR)/build
-# 	cmake --build $(GLFW_DIR)/build
+%.o: %.c cub3d.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
-# $(MLX_DIR)/libmlx42.a:
-# 	cmake -B $(MLX_DIR) -S	/home/slakhrou/Desktop/MLX42
-# 	cmake -C	$(MLX_DIR)
+$(GLFW_DIR)/build/src/libglfw3.a:
+	cmake -S $(GLFW_DIR) -B $(GLFW_DIR)/build
+	cmake --build $(GLFW_DIR)/build
 
-# clean:
-# 	$(RM) $(OBJ)
+$(MLX_DIR)/libmlx42.a:
+	cmake -B $(MLX_DIR) -S	/home/slakhrou/Desktop/MLX42
+	cmake -C	$(MLX_DIR)
 
-# fclean: clean
-# 	$(RM) $(NAME)
+clean:
+	$(RM) $(OBJ)
 
-# re: fclean all
-# // reflix
-all : $(NAME)
+fclean: clean
+	$(RM) $(NAME)
 
-$(NAME) : $(OBJ)
-	$(CC)	$(CFLAGS)	$(OBJ)	$(MLXF)	-o $(NAME)
+re: fclean all
 
-%.o : %.c	cub3d.h
-	$(CC)	$(CFLAGS)	-c	$< -o $@
 
-clean :
-	$(RM)	$(OBJ)
+# all : $(NAME)
 
-fclean : clean
-	$(RM)	$(NAME)
+# $(NAME) : $(OBJ)
+# 	$(CC)	$(CFLAGS)	$(OBJ)	$(MLXF)	-o $(NAME)
 
-re : fclean	all
-# // main
+# %.o : %.c	cub3d.h
+# 	$(CC)	$(CFLAGS)	-c	$< -o $@
+
+# clean :
+# 	$(RM)	$(OBJ)
+
+# fclean : clean
+# 	$(RM)	$(NAME)
+
+# re : fclean	all
+# # // main
