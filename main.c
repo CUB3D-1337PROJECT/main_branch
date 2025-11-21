@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: spi <spi@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:38:45 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/07 14:04:11 by spi              ###   ########.fr       */
+/*   Updated: 2025/11/13 20:35:25 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,10 @@ static void cub_connection(t_cub3d *data)
 
 static void init_player_info(t_cub3d *data)
 {
-    data->player.pos_x = data->player_x ;
-    data->player.pos_y = data->player_y ;
+	data->player.pos_x = data->player_x + 0.5;
+	data->player.pos_y = data->player_y + 0.5;
 	if (data->player_view == 'S')
 	{
-		data->player.pos_x = data->player_x + 0.5;
-    	data->player.pos_y = data->player_y ;
 		data->player.dir_x = 0;
 		data->player.dir_y = 1;
 		data->player.plane_x = -0.66;
@@ -40,8 +38,6 @@ static void init_player_info(t_cub3d *data)
 	}
 	else if (data->player_view == 'N')
 	{
-		data->player.pos_x = data->player_x + 0.5;
-    	data->player.pos_y = data->player_y ;
 		data->player.dir_x = 0;
 		data->player.dir_y = -1;
 		data->player.plane_x = 0.66;
@@ -49,8 +45,6 @@ static void init_player_info(t_cub3d *data)
 	}
     else 	if (data->player_view == 'W')
 	{
-		data->player.pos_x = data->player_x ;
-    	data->player.pos_y = data->player_y + 0.5;
 		data->player.dir_x = -1;
 		data->player.dir_y = 0;
 		data->player.plane_x = 0;
@@ -58,8 +52,6 @@ static void init_player_info(t_cub3d *data)
 	}
 	else if (data->player_view == 'E')
 	{
-		data->player.pos_x = data->player_x ;
-    	data->player.pos_y = data->player_y + 0.5;
 		data->player.dir_x = 1;
 		data->player.dir_y = 0;
 		data->player.plane_x = 0;
@@ -73,7 +65,7 @@ int main(int argc, char **argv)
 {
     t_cub3d *data = ft_calloc(1, sizeof(t_cub3d));
     if (!data)
-        return (putstr_fd("Error\ncalloc failed\n", 2), 1); 
+        return (putstr_fd("Error\ncalloc failed\n", 2), 1);
     if (parsing(argc, argv, data))
         return (free_cub3d(data), 1);
     cub_connection(data);
