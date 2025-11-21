@@ -1,0 +1,8 @@
+// -----> PARSE
+
+    ./cub3D map    
+    ➜  mbranch git:(main) ✗ ./cub3D map.
+    Error
+    Invalid file extension
+    ➜  mbranch git:(main) ✗ ./cub3D map 
+    ➜  mbranch git:(main) ✗ 

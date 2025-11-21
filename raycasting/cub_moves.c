@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:59:00 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/11/11 18:05:46 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/13 20:16:22 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,9 @@ void move_forward(t_cub3d *data)
 
 	MOVESPEED = 0.20;
 	if (!is_wall(data, data->player.pos_x + data->player.dir_x * MOVESPEED,
-			data->player.pos_y))
-	{
-		data->player.pos_x = data->player.pos_x + data->player.dir_x * MOVESPEED;
-	}
-	if (!is_wall(data, data->player.pos_x,
-			data->player.pos_y + data->player.dir_y * MOVESPEED))
-	{
+        data->player.pos_y + data->player.dir_y * MOVESPEED))
+    {
+        data->player.pos_x = data->player.pos_x + data->player.dir_x * MOVESPEED;
 		data->player.pos_y = data->player.pos_y + data->player.dir_y * MOVESPEED;
 	}
 	raycasting(&data->player, data);
