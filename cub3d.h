@@ -105,10 +105,8 @@ typedef struct s_texture_colors
     uint32_t	*pix_buff;
     uint32_t	color;
     uint32_t	offset;
-    uint8_t     r;   
-    uint8_t     g;   
-    uint8_t     b;   
-    uint8_t     a;   
+    int			tex_y;
+    int			tex_x;
 }   t_texture_colors;
 
 typedef struct s_cub3d
@@ -180,7 +178,6 @@ void	delete_textures(t_textures	*textures);
 void	ft_append(t_list	**lst, char	*line);
 int		is_only_spaces(char	*line);
 int			check_img_extention(char *str, char *exten);
-// uint32_t	create_trgb(int r, int g, int b,int a);
 int		parse_rgb_values(char	*color, int	**rgb);
 void	assign_floor_color(int	*rgb, t_cub3d	*data);
 void	assign_ceiling_color(int	*rgb, t_cub3d	*data);

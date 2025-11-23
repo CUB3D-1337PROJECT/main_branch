@@ -12,32 +12,9 @@
 
 #include "../cub3d.h"
 
-static void ensure_frame_image(t_cub3d *data)
-{
-	int	created;
-
-	created = 0;
-	if (!data || !data->mlx)
-		return;
-	if (data->img && (data->img->width != WIDTH || data->img->height != HEIGHT))
-	{
-		mlx_delete_image(data->mlx, data->img);
-		data->img = NULL;
-	}
-	if (!data->img)
-	{
-		data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-		if (!data->img)
-			ft_clean(data, "MLX42 img", "Failed to create image", 1);
-		created = 1;
-	}
-	if (created)
-		mlx_image_to_window(data->mlx, data->img, 0, 0);
-}
-
 static void init_raycasting(t_rayinfo *ray, int x, t_playerinfo *player)
 {
-  ray->camera_x = 2 * x/(double)WIDTH - 1; 
+    ray->camera_x = 2 * x/(double)WIDTH - 1;
 	ray->dir_x = player->dir_x + player->plane_x * ray->camera_x;
 	ray->dir_y = player->dir_y + player->plane_y * ray->camera_x;
 	ray->raystart_x = player->pos_x;
@@ -54,39 +31,7 @@ static void init_raycasting(t_rayinfo *ray, int x, t_playerinfo *player)
         ray->dest_y = fabs(1.0 / ray->dir_y);
 }
 
-static void	calculate_line_height(t_rayinfo *ray, t_cub3d *data, t_playerinfo *player)
-{
-    if (ray->side == 0)
-		  ray->wall_dest = (ray->sidedist_x - ray->dest_x);
-    else
-	      ray->wall_dest = (ray->sidedist_y - ray->dest_y);
-    // if (ray->side == 0)
-    //     ray->wall_dest = (ray->map_x - player->pos_x + (1 - ray->step_x) / 2) / ray->dir_x;
-    // else
-    //     ray->wall_dest = (ray->map_y - player->pos_y + (1 - ray->step_y) / 2) / ray->dir_y;
-    ray->line_h = (int)(HEIGHT / ray->wall_dest);
-    ray->start_draw = -(ray->line_h) / 2 + HEIGHT / 2;
-    if (ray->start_draw < 0)
-		    ray->start_draw = 0;
-    ray->draw_end = ray->line_h / 2 + HEIGHT / 2;
-    if (ray->draw_end >= HEIGHT)
-		    ray->draw_end = HEIGHT - 1;
-    if (ray->side == 0)
-		    ray->wall_x = player->pos_y + ray->wall_dest * ray->dir_y;
-    else
-        ray->wall_x = player->pos_x + ray->wall_dest * ray->dir_x;
-    ray->wall_x -= floor(ray->wall_x);
-    data->tex_height = data->texts->text_no->height;
-    data->tex_width = data->texts->text_no->width;
-    ray->tex_x = (int)(ray->wall_x * (double)data->tex_width);
-    if (ray->side == 0 && ray->dir_x > 0)
-        ray->tex_x = data->tex_width - ray->tex_x - 1;
-    if (ray->side == 1 && ray->dir_y < 0)
-        ray->tex_x = data->tex_width - ray->tex_x - 1;
-    ray->tex_step = 1.0 * data->tex_height / ray->line_h;
-    ray->tex_pos = (ray->start_draw - HEIGHT / 2 + ray->line_h / 2) * ray->tex_step;
-}
-    
+
 static void	init_ray(t_rayinfo *ray)
 {
     ray->camera_x = 0;
@@ -130,15 +75,57 @@ static void texture_sides(t_cub3d *data)
     }
 }
 
-static void	sample_texture(t_texture_colors *tc, mlx_texture_t *text,
-				t_cub3d *data)
+static void	sample_texture(t_texture_colors *tc, t_cub3d *data)
 {
-	(void)data;
-	(void)text;
-	tc->color = 0x00FF00FF;
+        tc->tex_y = (int)(data->ray.tex_pos);
+        if (tc->tex_y < 0)
+            tc->tex_y = 0;
+        if (tc->tex_y >= (int)data->curr_texture->height)
+            tc->tex_y = (int)data->curr_texture->height - 1;
+        tc->tex_x = data->ray.tex_x;
+        if (tc->tex_x < 0) 
+            tc->tex_x = 0;
+        if (tc->tex_x >= (int)data->curr_texture->width)
+            tc->tex_x = (int)data->curr_texture->width - 1;
+        tc->color = ((uint32_t *)data->curr_texture->pixels)[tc->tex_y * data->curr_texture->width + tc->tex_x];
+        data->ray.tex_pos += data->ray.tex_step;
 }
 
-static void	ft_color(t_cub3d *data, mlx_texture_t *text, int x, int y)
+static void	calculate_line_height(t_rayinfo *ray, t_cub3d *data, t_playerinfo *player)
+{
+    if (ray->side == 0)
+          ray->wall_dest = (ray->sidedist_x - ray->dest_x);
+    else
+          ray->wall_dest = (ray->sidedist_y - ray->dest_y);
+    // if (ray->side == 0)
+    //     ray->wall_dest = (ray->map_x - player->pos_x + (1 - ray->step_x) / 2) / ray->dir_x;
+    // else
+    //     ray->wall_dest = (ray->map_y - player->pos_y + (1 - ray->step_y) / 2) / ray->dir_y;
+    ray->line_h = (int)(HEIGHT / ray->wall_dest);
+    ray->start_draw = -(ray->line_h) / 2 + HEIGHT / 2;
+    if (ray->start_draw < 0)
+            ray->start_draw = 0;
+    ray->draw_end = ray->line_h / 2 + HEIGHT / 2;
+    if (ray->draw_end >= HEIGHT)
+            ray->draw_end = HEIGHT - 1;
+    if (ray->side == 0)
+            ray->wall_x = player->pos_y + ray->wall_dest * ray->dir_y;
+    else
+        ray->wall_x = player->pos_x + ray->wall_dest * ray->dir_x;
+    ray->wall_x -= floor(ray->wall_x);
+    data->tex_width = data->curr_texture->width;
+    data->tex_height = data->curr_texture->height;
+    ray->tex_x = (int)(ray->wall_x * (double)data->tex_width);
+    if (ray->side == 0 && ray->dir_x > 0)
+        ray->tex_x = data->tex_width - ray->tex_x - 1;
+    if (ray->side == 1 && ray->dir_y < 0)
+        ray->tex_x = data->tex_width - ray->tex_x - 1;
+    ray->tex_step = 1.0 * data->tex_height / ray->line_h;
+    ray->tex_pos = (ray->start_draw - HEIGHT / 2 + ray->line_h / 2) * ray->tex_step;
+}
+
+
+static void	ft_color(t_cub3d *data, int x, int y)
 {
 	t_texture_colors	tc;
 
@@ -150,10 +137,13 @@ static void	ft_color(t_cub3d *data, mlx_texture_t *text, int x, int y)
 		tc.color = data->rgb_color_ceiling;
 	else if (y >= data->ray.draw_end)
 		tc.color = data->rgb_color_flour;
-	else if (!text || !text->pixels || text->width == 0 || text->height == 0)
+	else if (!data->curr_texture || !data->curr_texture->pixels 
+            || data->curr_texture->width == 0 || data->curr_texture->height == 0)
 		tc.color = 0x00FF00FF;
-	else
-		sample_texture(&tc, text, data);
+    else
+    {
+        sample_texture(&tc, data);
+    }
 	tc.pix_buff[y * WIDTH + x] = tc.color;
 }
 
@@ -162,11 +152,6 @@ void raycasting(t_playerinfo *player, t_cub3d *data)
 	int x;
 	int y;
 
-	if (!data || !data->mlx)
-		return;
-	ensure_frame_image(data);
-	if (!data->img || !data->img->pixels)
-		return;
 	x = 0;
 	init_ray(&data->ray);
 	while (x < WIDTH)
@@ -178,7 +163,7 @@ void raycasting(t_playerinfo *player, t_cub3d *data)
 		y = 0;
 		while (y < HEIGHT)
 		{
-			ft_color(data, data->curr_texture, x, y);
+			ft_color(data, x, y);
 			y++;
 		}
 		x++;

@@ -6,3 +6,14 @@
     Invalid file extension
     ➜  mbranch git:(main) ✗ ./cub3D map 
     ➜  mbranch git:(main) ✗ 
+
+
+
+// raycast
+
+./cub3D map.cub
+err
+cub : error: MLX42 Instanceerr
+cub : error: Failed to init MLX%  
+
+when #define WIDTH 0 or height 0
