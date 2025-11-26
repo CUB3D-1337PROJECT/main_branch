@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 16:34:02 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/05 19:48:57 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/22 18:20:28 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,11 @@ int	check_extention(char *str, char *exten)
 
 	len_str = ft_strlen(str);
 	len_ext = ft_strlen(exten);
-	if (len_str < len_ext)
+	if (len_str <= len_ext || is_empty(str))
+	{
+		putstr_fd("Error\nInvalid file map name\n", 2);
 		return (1);
+	}
 	if (ft_strcmp(str + len_str - len_ext, exten) != 0)
 	{
 		putstr_fd("Error\nInvalid file extension\n", 2);

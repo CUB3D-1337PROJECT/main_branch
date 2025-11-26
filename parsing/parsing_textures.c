@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:54:14 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/21 13:55:54 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/26 14:19:49 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,12 @@ static int	fill_data_texture(char	*ident, char	*path_texture,
 {
 	int	fd;
 
+	if (check_double_slash(path_texture))
+		return (putstr_fd("Error\n invalid path texture\n", 2), 1);
 	fd = open(path_texture, O_RDONLY);
 	if (fd < 0)
 		return (perror("Error\n can't open texture"), 1);
-	else if (check_img_extention(path_texture, ".png")
-		&& check_img_extention(path_texture, ".xpm"))
+	else if (check_img_extention(path_texture, ".png"))
 	{
 		putstr_fd("Error\n can't open texture (no textures found)\n", 2);
 		close(fd);
