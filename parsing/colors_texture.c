@@ -1,12 +1,12 @@
+/* ************************************************************************** */
+/*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   colors_texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/03 12:39:34 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/11 16:06:06 by lhchiban         ###   ########.fr       */
-/*   Updated: 2025/11/21 13:55:12 by slakhrou         ###   ########.fr       */
+/*   Created: 2025/11/11 16:06:06 by lhchiban          #+#    #+#             */
+/*   Updated: 2025/11/26 15:47:03 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 uint32_t	create_trgb(int r, int g, int b)
 {
-	return (r << 24 | g << 16 | b << 8 | 255);
+	//return (r << 24 | g << 16 | b << 8);
+	return (r << 24 | g << 16 | b << 8 | 0);
 }
 
 int	parse_rgb_values(char *color, int	**rgb)
@@ -64,4 +65,25 @@ void	assign_ceiling_color(int *rgb, t_cub3d *data)
 	else
 		free(rgb);
 	data->counters.nb_ceiling++;
+}
+
+int		check_double_slash(char *path_texture)
+{
+	int	i;
+	int len;
+
+	i = 0;
+	len = ft_strlen(path_texture);
+	if (path_texture[len - 1] == '/')
+		return (1);
+	while (path_texture[i])
+	{
+		if (path_texture[i] == '/')
+		{
+			if (path_texture[i + 1] && path_texture[i+1] == '/')
+				return (1);
+		}
+		i++;
+	}
+	return (0);
 }

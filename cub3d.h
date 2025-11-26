@@ -21,9 +21,9 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <errno.h>
-// # include "/home/slakhrou/Desktop/MLX42/include/MLX42/MLX42.h"
+# include "/home/slakhrou/Desktop/MLX42/include/MLX42/MLX42.h"
 #include <math.h>
-# include "MLX42/include/MLX42/MLX42.h"
+// # include "MLX42/include/MLX42/MLX42.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE	25
@@ -177,10 +177,11 @@ void	delete_textures(t_textures	*textures);
 void	delete_textures(t_textures	*textures);
 void	ft_append(t_list	**lst, char	*line);
 int		is_only_spaces(char	*line);
-int			check_img_extention(char *str, char *exten);
+int		check_img_extention(char *str, char *exten);
 int		parse_rgb_values(char	*color, int	**rgb);
 void	assign_floor_color(int	*rgb, t_cub3d	*data);
 void	assign_ceiling_color(int	*rgb, t_cub3d	*data);
+int		check_double_slash(char *path_texture);
 void  	cub_handel_events(t_cub3d *data);
 void  	move_right(t_cub3d *data);
 void  	move_left(t_cub3d *data);
