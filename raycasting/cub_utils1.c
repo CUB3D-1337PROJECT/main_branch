@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 10:57:41 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/11/27 13:59:57 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/28 00:15:06 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void callback(mlx_key_data_t keydata, void *param)
         else if (keydata.key == MLX_KEY_W)
             move_forward(data);
         if (keydata.key == MLX_KEY_RIGHT)
-            rotate_right(data);
+            rotate_right(data, data->rotate);
         if (keydata.key == MLX_KEY_LEFT)
-            rotate_left(data);
+            rotate_left(data, data->rotate);
         if (keydata.key == MLX_KEY_ESCAPE)
             ft_clean(data, 0, 0, 0);
     }

@@ -25,19 +25,16 @@
 #include <math.h>
 # include "MLX42/include/MLX42/MLX42.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE	25
-# endif
-#define HEIGHT 720
-#define WIDTH 1040
-#define BLOCK_SIZE 64
-#define XMIN 0
+#define BUFFER_SIZE	25
+#define HEIGHT 1200
+#define WIDTH 2400
+#define ROTATE_L -0.20
+#define ROTATE_R 0.20
+#define	MOVESPEED 0.24
+
 
 typedef struct s_playerinfo
 {
-
-  mlx_image_t *player_img;
-  char	dir;
 	double	pos_x;
 	double	pos_y;
 	double	dir_x;
@@ -109,12 +106,22 @@ typedef struct s_texture_colors
     int			tex_x;
 }   t_texture_colors;
 
+typedef struct s_rotateinfo
+{
+	double	rotate_planx;
+	double	rotate_dirx;
+} t_rotateinfo;
+
 typedef struct s_cub3d
 {
     mlx_t			*mlx;
     mlx_image_t		*img;
 	t_playerinfo	player;
 	t_rayinfo		ray;
+	mlx_texture_t	*curr_texture;
+	t_textures		*texts;
+	t_count			counters;
+	t_rotateinfo	rotate;
 	char			*no_tex;
 	char			*so_tex;
 	char			*ea_tex;
@@ -123,12 +130,9 @@ typedef struct s_cub3d
 	uint32_t		rgb_color_flour;
 	int				*ceiling;
 	uint32_t		rgb_color_ceiling;
-	t_count			counters;
 	char			**map;
-	t_textures		*texts;
-	mlx_texture_t	*curr_texture;
-    int              tex_width;
-    int              tex_height;
+    int				tex_width;
+    int				tex_height;
 	int				map_length;
 	int				map_width;
 	int				player_x;
@@ -136,19 +140,19 @@ typedef struct s_cub3d
 	char			player_view;
 }				t_cub3d;
 
-int     is_empty(char	*line);
-void    free_allocation(char **arr, int j);
-int	    is_not_map(char	*s);
-void    putstr_fd(char	*s, int fd);
-void    ft_putchar_fd(char c, int fd);
-char    *ft_copy(char	*s1);
-char    **ft_split(char	*s, char	*charset);
-void    free_allocation(char **arr, int j);
-void    free_split(char	**str);
-void    *ft_calloc(size_t	count, size_t	size);
-size_t  ft_strlen(const char *str);
-char    *ft_strdup(const char	*s1);
-char    *ft_strjoin(char const *s1, char const	*s2);
+int		is_empty(char	*line);
+void 	free_allocation(char **arr, int j);
+int		is_not_map(char	*s);
+void	putstr_fd(char	*s, int fd);
+void	ft_putchar_fd(char c, int fd);
+char	*ft_copy(char	*s1);
+char	**ft_split(char	*s, char	*charset);
+void	free_allocation(char **arr, int j);
+void	free_split(char	**str);
+void	*ft_calloc(size_t	count, size_t	size);
+size_t	ft_strlen(const char *str);
+char	*ft_strdup(const char	*s1);
+char	*ft_strjoin(char const *s1, char const	*s2);
 char	*ft_strchr(const char *s, int c);
 char	*ft_substr(char const	*s, unsigned int start, size_t	len);
 int		ft_strcmp(const char *s1, const char *s2);
@@ -182,15 +186,15 @@ int		parse_rgb_values(char	*color, int	**rgb);
 void	assign_floor_color(int	*rgb, t_cub3d	*data);
 void	assign_ceiling_color(int	*rgb, t_cub3d	*data);
 int		check_double_slash(char *path_texture);
-void  	cub_handel_events(t_cub3d *data);
-void  	move_right(t_cub3d *data);
-void  	move_left(t_cub3d *data);
-void  	move_forward(t_cub3d *data);
-void  	move_backward(t_cub3d *data);
-void  	rotate_right(t_cub3d *data);
-void  	rotate_left(t_cub3d *data);
-void  	ft_clean(t_cub3d *data, char *err_type, char *err_msg, int err_exit);
-void  	raycasting(t_playerinfo *player, t_cub3d *data);
+void	cub_handel_events(t_cub3d *data);
+void	move_right(t_cub3d *data);
+void	move_left(t_cub3d *data);
+void	move_forward(t_cub3d *data);
+void	move_backward(t_cub3d *data);
+void	rotate_right(t_cub3d *data, t_rotateinfo rotate);
+void	rotate_left(t_cub3d *data, t_rotateinfo rotate);
+void	ft_clean(t_cub3d *data, char *err_type, char *err_msg, int err_exit);
+void	raycasting(t_playerinfo *player, t_cub3d *data);
 void	set_dda(t_cub3d *data);
 
 #endif
