@@ -26,11 +26,11 @@
 # include "MLX42/include/MLX42/MLX42.h"
 
 #define BUFFER_SIZE	25
-#define HEIGHT 1200
-#define WIDTH 2400
-#define ROTATE_L -0.20
-#define ROTATE_R 0.20
-#define	MOVESPEED 0.24
+#define HEIGHT 720
+#define WIDTH 1040
+#define ROTATE_L -0.033
+#define ROTATE_R 0.033
+#define	MOVESPEED 0.1
 
 
 typedef struct s_playerinfo

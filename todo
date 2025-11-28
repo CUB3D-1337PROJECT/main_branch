@@ -1,23 +1,38 @@
 // #  PARSE
 
-// #   ./cub3D map    
+// #   ./cub3D map
 //     ➜  mbranch git:(main) ✗ ./cub3D map.
 //     Error
 //     Invalid file extension
-//     ➜  mbranch git:(main) ✗ ./cub3D map 
-//     ➜  mbranch git:(main) ✗ 
+//     ➜  mbranch git:(main) ✗ ./cub3D map
+//     ➜  mbranch git:(main) ✗
 
 // # -------
 
 //     about if u check the permessions
 
 // # -------
-//      when i set ? in any path "WE texture?/005_height.png" 
+//     when i set ? in any path "WE texture?/005_height.png"
 //     cub git:(main) ✗ ./cub3D map.cub
 //     Error
 //     can't open texture: No such file or directory
 
+// # -------
+//	F 30,4294967296,0
+//	C 255,0,0
+//	overflow colors
 
+// # -------
+// when i change the dir of texture to tex ture
+// EA ./tex ture/004_basecolor.png
+// NO	tex ture/004_height.png
+
+// SO tex ture/001_height.png
+// WE tex ture/005_height.png
+
+// ./cub3D map.cub
+// Error
+//  Invalid line ( not texture and not map)
 
 
 // ----> raycast <----
@@ -25,6 +40,6 @@
 // ./cub3D map.cub
 // err
 // cub : error: MLX42 Instanceerr
-// cub : error: Failed to init MLX%  
+// cub : error: Failed to init MLX%
 
 // when #define WIDTH 0 or height 0

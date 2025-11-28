@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:38:45 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/25 19:57:04 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/28 14:58:26 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,21 @@ static void init_player_info(t_cub3d *data)
 		return ;
 }
 
+void	f()
+{
+	system("leaks cub3D");
+}
+
 int main(int argc, char **argv)
 {
+	// atexit(f);
     t_cub3d *data = ft_calloc(1, sizeof(t_cub3d));
     if (!data)
-        return (putstr_fd("Error\ncalloc failed\n", 2), 1);
+        return (free(data), putstr_fd("Error\ncalloc failed\n", 2), 1);
     if (parsing(argc, argv, data))
         return (free_cub3d(data), 1);
     cub_connection(data);
-    if (load_textures(data))
+    if (load_textures(data)) /// double free
         return (free_cub3d(data), 1);
     init_player_info(data);
     raycasting(&data->player, data);

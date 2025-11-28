@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors_texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 16:06:06 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/11/26 15:47:03 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/28 14:43:23 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 uint32_t	create_trgb(int r, int g, int b)
 {
 	//return (r << 24 | g << 16 | b << 8);
-	return (r << 24 | g << 16 | b << 8 | 0);
+	return (r << 24 | g << 16 | b << 8 | 255);
 }
 
 int	parse_rgb_values(char *color, int	**rgb)
