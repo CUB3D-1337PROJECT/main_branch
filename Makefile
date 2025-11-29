@@ -1,21 +1,21 @@
 # // slakhrou
 CC = cc #-fsanitize=address
-CFLAGS = -Wall -Wextra -Werror -I$(MLX_DIR) -I$(GLFW_DIR)/include
-MLX_DIR = /home/slakhrou/Desktop/MLX42/build
-GLFW_DIR = /home/slakhrou/Desktop/MLX42/glfw
-MLXF = -L$(MLX_DIR) -lmlx42 -L$(GLFW_DIR)/build/src -lglfw3 -lX11 -lXext -lm
+# CFLAGS = -Wall -Wextra -Werror -I$(MLX_DIR) -I$(GLFW_DIR)/include
+# MLX_DIR = /home/slakhrou/Desktop/MLX42/build
+# GLFW_DIR = /home/slakhrou/Desktop/MLX42/glfw
+# MLXF = -L$(MLX_DIR) -lmlx42 -L$(GLFW_DIR)/build/src -lglfw3 -lX11 -lXext -lm
 
 RM = rm -rf
 NAME = cub3D
 
 # //reflix
 # CC = cc
-# CFLAGS = -Wall -Wextra -Werror
-# MLX_DIR = ./MLX42
-# MLXF = -I$(MLX_DIR)/include \
-# 		-L$(MLX_DIR)/build -lmlx42\
-# 		-L/goinfre/lhchiban/homebrew/lib -lglfw3 \
-# 		-framework Cocoa -framework OpenGL -framework IOKit
+CFLAGS = -Wall -Wextra -Werror
+MLX_DIR = ./MLX42
+MLXF = -I$(MLX_DIR)/include \
+		-L$(MLX_DIR)/build -lmlx42\
+		-L/goinfre/lhchiban/homebrew/lib -lglfw3 \
+		-framework Cocoa -framework OpenGL -framework IOKit
 # CFLAGS = -Wall -Wextra -Werror
 # MLX_DIR = ./MLX42
 # MLXF = -I$(MLX_DIR)/include \

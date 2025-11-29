@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 17:56:55 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 11:48:49 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/29 17:58:07 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <errno.h>
-# include "/home/slakhrou/Desktop/MLX42/include/MLX42/MLX42.h"
+// # include "/home/slakhrou/Desktop/MLX42/include/MLX42/MLX42.h"
 # include <math.h>
-// # include "MLX42/include/MLX42/MLX42.h"
+# include "MLX42/include/MLX42/MLX42.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE	25
