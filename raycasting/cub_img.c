@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   cub_img.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:12:21 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/11/26 18:07:15 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/29 17:14:49 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void	init_raycasting(t_rayinfo	*ray, int x, t_playerinfo	*player)
+static void	init_raycasting(t_rayinfo *ray, int x, t_playerinfo *player)
 {
-	ray->camera_x = 2 * x / (double) WIDTH - 1;
+	ray->camera_x = 2 * x / (double)WIDTH - 1;
 	ray->dir_x = player->dir_x + player->plane_x * ray->camera_x;
 	ray->dir_y = player->dir_y + player->plane_y * ray->camera_x;
 	ray->raystart_x = player->pos_x;
@@ -31,7 +31,7 @@ static void	init_raycasting(t_rayinfo	*ray, int x, t_playerinfo	*player)
 		ray->dest_y = fabs(1.0 / ray->dir_y);
 }
 
-static void	init_ray(t_rayinfo	*ray)
+static void	init_ray(t_rayinfo *ray)
 {
 	ray->camera_x = 0;
 	ray->dir_x = 0;
@@ -56,8 +56,26 @@ static void	init_ray(t_rayinfo	*ray)
 	ray->tex_pos = 0;
 }
 
-static void	calculate_line_height(t_rayinfo	*ray, t_cub3d	*data,
-			t_playerinfo	*player)
+static void	texture_sides(t_cub3d *data)
+{
+	if (data->ray.side == 1)
+	{
+		if (data->ray.dir_y > 0)
+			data->curr_texture = data->texts->text_so;
+		else
+			data->curr_texture = data->texts->text_no;
+	}
+	else
+	{
+		if (data->ray.dir_x > 0)
+			data->curr_texture = data->texts->text_ea;
+		else
+			data->curr_texture = data->texts->text_we;
+	}
+}
+
+static void	calculate_line_height(t_rayinfo *ray, t_cub3d *data,
+				t_playerinfo *player)
 {
 	if (ray->side == 0)
 		ray->wall_dest = (ray->sidedist_x - ray->dest_x);
@@ -75,17 +93,18 @@ static void	calculate_line_height(t_rayinfo	*ray, t_cub3d	*data,
 	else
 		ray->wall_x = player->pos_x + ray->wall_dest * ray->dir_x;
 	ray->wall_x -= floor(ray->wall_x);
-	data->tex_width = data->cur_text->width;
-	data->tex_height = data->cur_text->height;
+	data->tex_width = data->curr_texture->width;
+	data->tex_height = data->curr_texture->height;
 	ray->tex_x = (int)(ray->wall_x * (double)data->tex_width);
 	ray->tex_x = data->tex_width - ray->tex_x - 1;
 	if (ray->side == 1 && ray->dir_y < 0)
 		ray->tex_x = data->tex_width - ray->tex_x - 1;
 	ray->tex_step = 1.0 * data->tex_height / ray->line_h;
-	ray->tex_pos = (ray->start_draw - HEIGHT / 2 + ray->line_h / 2) * ray->tex_step;
+	ray->tex_pos = (ray->start_draw - HEIGHT / 2 + ray->line_h / 2)
+		* ray->tex_step;
 }
 
-void	raycasting(t_playerinfo	*player, t_cub3d	*data)
+void	raycasting(t_playerinfo *player, t_cub3d *data)
 {
 	int	x;
 	int	y;

@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/mnt/homes/lhchiban/Desktop/curses/mcub",
-      "program": "/mnt/homes/lhchiban/Desktop/curses/mcub/build/Debug/outDebug"
+      "cwd": "/mnt/homes/lhchiban/merge",
+      "program": "/mnt/homes/lhchiban/merge/build/Debug/outDebug"
     }
   ]
 }

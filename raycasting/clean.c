@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   clean.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/29 11:21:49 by lhchiban          #+#    #+#             */
+/*   Updated: 2025/11/29 17:09:50 by lhchiban         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../cub3d.h"
 
@@ -21,7 +32,6 @@ void	ft_clean(t_cub3d *data, char *err_type,
 	if (data->img && data->mlx)
 		mlx_delete_image(data->mlx, data->img);
 	if (data->mlx)
-	mlx_terminate(data->mlx);
-	// free textures
+		mlx_terminate(data->mlx);
 	exit(err_exit);
 }
