@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_moves.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:59:00 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/11/13 20:16:22 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/28 15:43:24 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void move_right(t_cub3d *data)
 {
 	double 	MOVESPEED;
 
-	MOVESPEED = 0.20;
+	MOVESPEED = 0.2;
 	if (!is_wall(data,  data->player.pos_x - data->player.dir_y * MOVESPEED,
 			data->player.pos_y + data->player.dir_x * MOVESPEED))
 	{
@@ -39,7 +39,7 @@ void move_left(t_cub3d *data)
 {
 	double 	MOVESPEED;
 
-	MOVESPEED = 0.20;
+	MOVESPEED = 0.2;
 	if (!is_wall(data, data->player.pos_x + data->player.dir_y * MOVESPEED,
 			data->player.pos_y - data->player.dir_x * MOVESPEED))
 	{
@@ -52,7 +52,7 @@ void move_forward(t_cub3d *data)
 {
 	double 	MOVESPEED;
 
-	MOVESPEED = 0.20;
+	MOVESPEED = 0.2;
 	if (!is_wall(data, data->player.pos_x + data->player.dir_x * MOVESPEED,
         data->player.pos_y + data->player.dir_y * MOVESPEED))
     {
@@ -66,7 +66,7 @@ void move_backward(t_cub3d *data)
 {
 	double 	MOVESPEED;
 
-	MOVESPEED = 0.20;
+	MOVESPEED = 0.2;
 	if (!is_wall(data, data->player.pos_x - data->player.dir_x * MOVESPEED,
 	 	data->player.pos_y - data->player.dir_y * MOVESPEED))
 	{

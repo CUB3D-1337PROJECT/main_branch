@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 14:38:36 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/05 17:17:49 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/29 10:55:17 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	ft_append(t_list	**lst, char	*line)
 		node -> next = NULL;
 		return ;
 	}
-	while (ptr -> next)
-		ptr = ptr-> next;
-	ptr -> next = node;
-	node -> next = NULL;
+	while (ptr->next)
+		ptr = ptr->next;
+	ptr->next = node;
+	node->next = NULL;
 }
 
 int	is_empty(char	*line)

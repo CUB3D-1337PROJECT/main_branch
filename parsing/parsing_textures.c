@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:54:14 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/26 14:19:49 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/29 11:40:31 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	fill_data_texture(char	*ident, char	*path_texture,
 		return (perror("Error\n can't open texture"), 1);
 	else if (check_img_extention(path_texture, ".png"))
 	{
-		putstr_fd("Error\n can't open texture (no textures found)\n", 2);
+		putstr_fd("Error\n can't open texture (invalid picture)\n", 2);
 		close(fd);
 		return (1);
 	}
@@ -90,22 +90,18 @@ static int	fill_data_colors(char *ident, char *color, t_cub3d *data)
 	return (0);
 }
 
-int	fill_texture(char	*line, char	**splits, t_cub3d	*data)
+int	fill_texture(char	**splits, t_cub3d	*data)
 {
 	int		count;
 	char	*ident;
 
 	count = count_elment(splits);
-	if (count != 2 && splits[0])
+	if (count != 2 && splits[0] && splits[0][0] != 'C' && splits[0][0] != 'F')
 		return (putstr_fd(
 				"Error\n Invalid line ( not texture and not map)\n", 2), 1);
 	ident = find_identifier(splits[0]);
 	if (!ident)
 		return (putstr_fd("Error\n wrong texture identifier\n", 2), 1);
-	if (*(ft_strnstr(line, ident, ft_strlen(line)) + ft_strlen(ident)) != ' '
-		&& *(ft_strnstr(line, ident, ft_strlen(line)) + ft_strlen(ident))
-		!= '\t')
-		return (free(ident), putstr_fd("Error\nspace on identifier\n", 2), 1);
 	if (ft_strcmp(ident, "F") && ft_strcmp(ident, "C"))
 	{
 		if (fill_data_texture(ident, splits[1], data))
