@@ -31,9 +31,9 @@ SRC =	main.c	\
 		get_next_line/get_next_line.c	outils.c	functions.c\
 		parsing/parser.c	parsing/printing.c	parsing/parsing_map.c\
 		parsing/parsing_textures.c	parsing/hepler_functions.c\
-    parsing/colors_texture.c parsing/map_functions.c	parsing/foutils.c\
-    raycasting/clean.c raycasting/cub_img.c raycasting/cub_moves.c raycasting/cub_color.c\
-    raycasting/cub_rotate.c raycasting/cub_utils1.c raycasting/dda_algo.c\
+		parsing/colors_texture.c parsing/map_functions.c	parsing/foutils.c\
+		raycasting/clean.c raycasting/cub_img.c raycasting/cub_moves.c raycasting/cub_color.c\
+		raycasting/cub_rotate.c raycasting/cub_utils1.c raycasting/dda_algo.c\
 		ft_split.c	ft_atoi.c
 
 OBJ = $(SRC:.c=.o)
@@ -105,4 +105,5 @@ re: fclean all
 # 	$(RM)	$(NAME)
 # re : fclean	all
 # # // main
+
 

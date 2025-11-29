@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:34 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 12:10:57 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/29 18:40:43 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 // # include "/home/slakhrou/Desktop/MLX42/include/MLX42/MLX42.h"
 # include <math.h>
 # include "MLX42/include/MLX42/MLX42.h"
-
 # define BUFFER_SIZE	25
 # define HEIGHT 720
 # define WIDTH 1040
@@ -78,13 +77,13 @@ typedef struct s_list
 
 typedef struct s_count
 {
-	int	nb_no_tex;
-	int	nb_so_tex;
-	int	nb_we_tex;
-	int	nb_ea_tex;
-	int	nb_flour;
-	int	nb_ceiling;
-	int	nb_players;
+	int		nb_no_tex;
+	int		nb_so_tex;
+	int		nb_we_tex;
+	int		nb_ea_tex;
+	int		nb_flour;
+	int		nb_ceiling;
+	int		nb_players;
 }			t_count;
 
 typedef struct s_textures
@@ -163,17 +162,17 @@ int		check_data_texture(t_cub3d	*data, char	*line);
 int		count_elment(char	**str);
 int		parsing(int argc, char	**argv, t_cub3d	*data);
 int		check_extention(char	*str, char	*exten);
-int		fill_texture(char	*line, char	**splits, t_cub3d	*data);
+int		fill_texture(char	**splits, t_cub3d	*data);
 int		check_rgb(char	**split_colors, int rgb[3], char	*color);
 int		check_two_commas(char	*color);
 char	*find_identifier(char	*first_split);
 int		parse_map(char	*line, int fd, t_cub3d	*data);
-int		get_max_width(t_list	*lst);
+size_t	get_max_width(t_list	*lst);
 int		is_space_neighbour(char	**map, int i, int j);
 int		is_valid_content(char c);
 int		validate_map(t_cub3d	*data, int columns);
 void	free_list(t_list	**lst);
-void	free_cub3d(t_cub3d	*data);
+void	free_cub3d(t_cub3d	*data, char c);
 int		load_textures(t_cub3d	*data);
 void	delete_textures(t_textures	*textures);
 void	delete_textures(t_textures	*textures);

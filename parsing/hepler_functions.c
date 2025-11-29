@@ -6,13 +6,13 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:42:09 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/28 17:47:48 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/29 18:12:00 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	free_cub3d(t_cub3d	*data)
+void	free_cub3d(t_cub3d	*data, char c)
 {
 	if (data->no_tex)
 		free(data->no_tex);
@@ -30,7 +30,8 @@ void	free_cub3d(t_cub3d	*data)
 		free(data->ceiling);
 	if (data->texts)
 	{
-		delete_textures(data->texts);
+		if (c == 'e')
+			delete_textures(data->texts);
 		free(data->texts);
 	}
 	free(data);
@@ -74,6 +75,7 @@ char	*find_identifier(char	*first_split)
 	char	*identifier;
 	char	*ident[7];
 
+	identifier = NULL;
 	j = 0;
 	ident[0] = "NO";
 	ident[1] = "SO";

@@ -6,16 +6,15 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 16:06:06 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/11/28 18:27:02 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/29 18:12:10 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-uint32_t	create_trgb(int r, int g, int b)
+static uint32_t	create_trgb(int r, int g, int b)
 {
-	//r
-	return (r << 24 | g << 16 | b << 8 | 255);
+	return (220 << 24 | b << 16 | g << 8 | r);
 }
 
 int	parse_rgb_values(char *color, int	**rgb)
@@ -67,10 +66,10 @@ void	assign_ceiling_color(int *rgb, t_cub3d *data)
 	data->counters.nb_ceiling++;
 }
 
-int		check_double_slash(char *path_texture)
+int	check_double_slash(char *path_texture)
 {
 	int	i;
-	int len;
+	int	len;
 
 	i = 0;
 	len = ft_strlen(path_texture);
@@ -80,7 +79,7 @@ int		check_double_slash(char *path_texture)
 	{
 		if (path_texture[i] == '/')
 		{
-			if (path_texture[i + 1] && path_texture[i+1] == '/')
+			if (path_texture[i + 1] && path_texture[i + 1] == '/')
 				return (1);
 		}
 		i++;

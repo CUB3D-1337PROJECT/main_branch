@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 16:55:06 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/15 18:29:35 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/28 20:49:33 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	*ft_calloc(size_t	count, size_t	size)
 	if (count != 0 && size > SIZE_MAX / count)
 		return (NULL);
 	if (count == 0 || size == 0)
-		return (malloc(1));
+		return (NULL);
 	p = malloc(count * size);
 	if (p == NULL)
 		return (NULL);
@@ -54,15 +54,13 @@ int	ft_strcmp(const char *s1, const char *s2)
 	size_t	i;
 
 	i = 0;
-	while (i < ft_strlen(s1))
+	while (s1[i] && s2[i])
 	{
-		if ((unsigned char ) s1[i] != (unsigned char) s2[i])
-			return ((unsigned char) s1[i] - (unsigned char) s2[i]);
-		if (s1[i] == '\0')
-			return (0);
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		i++;
 	}
-	return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
 void	free_split(char	**str)
