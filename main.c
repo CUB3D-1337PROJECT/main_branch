@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:38:45 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 18:10:23 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/29 18:39:56 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,14 @@ int	main(int argc, char **argv)
 	if (!data)
 		return (free(data), putstr_fd("Error\ncalloc failed\n", 2), 1);
 	if (parsing(argc, argv, data))
-		return (free_cub3d(data), 1);
+		return (free_cub3d(data, 'l'), 1);
 	cub_connection(data);
 	if (load_textures(data))
-		return (free_cub3d(data), 1);
+		return (free_cub3d(data, 'l'), 1);
 	init_player_info(data);
 	raycasting(&data->player, data);
 	cub_handel_events(data);
 	mlx_loop(data->mlx);
-	free_cub3d(data);
+	free_cub3d(data, 'e');
 	return (0);
 }

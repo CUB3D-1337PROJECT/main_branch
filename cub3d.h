@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:34 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 18:34:37 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/29 18:40:43 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,12 +167,12 @@ int		check_rgb(char	**split_colors, int rgb[3], char	*color);
 int		check_two_commas(char	*color);
 char	*find_identifier(char	*first_split);
 int		parse_map(char	*line, int fd, t_cub3d	*data);
-int		get_max_width(t_list	*lst);
+size_t	get_max_width(t_list	*lst);
 int		is_space_neighbour(char	**map, int i, int j);
 int		is_valid_content(char c);
 int		validate_map(t_cub3d	*data, int columns);
 void	free_list(t_list	**lst);
-void	free_cub3d(t_cub3d	*data);
+void	free_cub3d(t_cub3d	*data, char c);
 int		load_textures(t_cub3d	*data);
 void	delete_textures(t_textures	*textures);
 void	delete_textures(t_textures	*textures);
