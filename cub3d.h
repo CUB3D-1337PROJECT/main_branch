@@ -3,11 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:34 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/21 13:55:12 by slakhrou         ###   ########.fr       */
-
+/*   Updated: 2025/11/29 12:10:57 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +21,15 @@
 # include <fcntl.h>
 # include <errno.h>
 // # include "/home/slakhrou/Desktop/MLX42/include/MLX42/MLX42.h"
-#include <math.h>
+# include <math.h>
 # include "MLX42/include/MLX42/MLX42.h"
 
-#define BUFFER_SIZE	25
-#define HEIGHT 720
-#define WIDTH 1040
-#define ROTATE_L -0.033
-#define ROTATE_R 0.033
-#define	MOVESPEED 0.1
-
+# define BUFFER_SIZE	25
+# define HEIGHT 720
+# define WIDTH 1040
+# define ROTATE_L -0.033
+# define ROTATE_R 0.033
+# define MOVESPEED 0.05
 
 typedef struct s_playerinfo
 {
@@ -41,36 +39,36 @@ typedef struct s_playerinfo
 	double	dir_y;
 	double	plane_y;
 	double	plane_x;
-} t_playerinfo;
+}	t_playerinfo;
 
-typedef struct  s_rayinfo
+typedef struct s_rayinfo
 {
-    double	dir_x;
-	double	dir_y;
-    double  raystart_x;
-    double  raystart_y;
-	double	camera_x;
-	double	camera_y;
-	double	dest_x;
-	double	dest_y;
-	double	step_x;
-	double	step_y;
-	double	sidedist_x;
-	double	sidedist_y;
-	double	wall_dest;
-	double	wall_x;
-    double  tex_step;
-    double  tex_pos;
-	int 	map_x;
-	int 	map_y;
-	int	    line_h;
-	int	    start_draw;
-	int	    draw_end;
-	int	    side;
-    int     tex_x;
-    int     tex_y;
-    mlx_image_t *playerv_img;
-} t_rayinfo;
+	double			dir_x;
+	double			dir_y;
+	double			raystart_x;
+	double			raystart_y;
+	double			camera_x;
+	double			camera_y;
+	double			dest_x;
+	double			dest_y;
+	double			step_x;
+	double			step_y;
+	double			sidedist_x;
+	double			sidedist_y;
+	double			wall_dest;
+	double			wall_x;
+	double			tex_step;
+	double			tex_pos;
+	int				map_x;
+	int				map_y;
+	int				line_h;
+	int				start_draw;
+	int				draw_end;
+	int				side;
+	int				tex_x;
+	int				tex_y;
+	mlx_image_t		*playerv_img;
+}	t_rayinfo;
 
 typedef struct s_list
 {
@@ -99,23 +97,23 @@ typedef struct s_textures
 
 typedef struct s_texture_colors
 {
-    uint32_t	*pix_buff;
-    uint32_t	color;
-    uint32_t	offset;
-    int			tex_y;
-    int			tex_x;
-}   t_texture_colors;
+	uint32_t	*pix_buff;
+	uint32_t	color;
+	uint32_t	offset;
+	int			tex_y;
+	int			tex_x;
+}	t_texture_colors;
 
 typedef struct s_rotateinfo
 {
 	double	rotate_planx;
 	double	rotate_dirx;
-} t_rotateinfo;
+}	t_rotateinfo;
 
 typedef struct s_cub3d
 {
-    mlx_t			*mlx;
-    mlx_image_t		*img;
+	mlx_t			*mlx;
+	mlx_image_t		*img;
 	t_playerinfo	player;
 	t_rayinfo		ray;
 	mlx_texture_t	*curr_texture;
@@ -131,8 +129,8 @@ typedef struct s_cub3d
 	int				*ceiling;
 	uint32_t		rgb_color_ceiling;
 	char			**map;
-    int				tex_width;
-    int				tex_height;
+	int				tex_width;
+	int				tex_height;
 	int				map_length;
 	int				map_width;
 	int				player_x;
@@ -141,7 +139,7 @@ typedef struct s_cub3d
 }				t_cub3d;
 
 int		is_empty(char	*line);
-void 	free_allocation(char **arr, int j);
+void	free_allocation(char **arr, int j);
 int		is_not_map(char	*s);
 void	putstr_fd(char	*s, int fd);
 void	ft_putchar_fd(char c, int fd);
@@ -196,5 +194,7 @@ void	rotate_left(t_cub3d *data, t_rotateinfo rotate);
 void	ft_clean(t_cub3d *data, char *err_type, char *err_msg, int err_exit);
 void	raycasting(t_playerinfo *player, t_cub3d *data);
 void	set_dda(t_cub3d *data);
+void	ft_color(t_cub3d *data, int x, int y);
+int		is_wall(t_cub3d *data, double x, double y);
 
 #endif

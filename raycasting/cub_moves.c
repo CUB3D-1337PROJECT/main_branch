@@ -6,60 +6,104 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:59:00 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/11/28 15:56:41 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/29 11:45:42 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static int is_wall(t_cub3d *data, double x, double y)
+static void	move_player(t_cub3d *data, double new_dirx, double new_diry)
 {
-    if (x < 0 || y < 0 || y >= data->map_length || x >= data->map_width)
-        return (1);
-    if (data->map[(int)y][(int)x] == '1')
-        return (1);
-    return (0);
-}
+	double	new_x;
+	double	new_y;
+	double	new_xmargin;
+	double	new_ymargin;
 
-void move_right(t_cub3d *data)
-{
-	if (!is_wall(data,  data->player.pos_x - data->player.dir_y * MOVESPEED,
-			data->player.pos_y + data->player.dir_x * MOVESPEED))
-	{
-		data->player.pos_y = data->player.pos_y + data->player.dir_x * MOVESPEED;
-		data->player.pos_x = data->player.pos_x - data->player.dir_y * MOVESPEED;
-	}
-	raycasting(&data->player, data);
-}
-
-void move_left(t_cub3d *data)
-{
-	if (!is_wall(data, data->player.pos_x + data->player.dir_y * MOVESPEED,
-			data->player.pos_y - data->player.dir_x * MOVESPEED))
-	{
-		data->player.pos_y = data->player.pos_y - data->player.dir_x * MOVESPEED;
-		data->player.pos_x = data->player.pos_x + data->player.dir_y * MOVESPEED;
-	}
-	raycasting(&data->player, data);
-}
-void move_forward(t_cub3d *data)
-{
-	if (!is_wall(data, data->player.pos_x + data->player.dir_x * MOVESPEED,
-        data->player.pos_y + data->player.dir_y * MOVESPEED))
-    {
-        data->player.pos_x = data->player.pos_x + data->player.dir_x * MOVESPEED;
-		data->player.pos_y = data->player.pos_y + data->player.dir_y * MOVESPEED;
-	}
+	new_x = new_dirx + data->player.pos_x;
+	if (new_dirx > 0)
+		new_xmargin = 0.2;
+	else
+		new_xmargin = -0.2;
+	if (!is_wall(data, new_x + new_xmargin, data->player.pos_y))
+		data->player.pos_x = new_x;
+	new_y = new_diry + data->player.pos_y;
+	if (new_diry > 0)
+		new_ymargin = 0.2;
+	else
+		new_ymargin = -0.2;
+	if (!is_wall(data, data->player.pos_x, new_y + new_ymargin))
+		data->player.pos_y = new_y;
 	raycasting(&data->player, data);
 }
 
-void move_backward(t_cub3d *data)
+void	move_right(t_cub3d *data)
 {
-	if (!is_wall(data, data->player.pos_x - data->player.dir_x * MOVESPEED,
-	 	data->player.pos_y - data->player.dir_y * MOVESPEED))
+	double	new_dirx;
+	double	new_diry;
+
+	if (MOVESPEED > 0.79)
 	{
-		data->player.pos_y = data->player.pos_y - data->player.dir_y * MOVESPEED;
-		data->player.pos_x = data->player.pos_x - data->player.dir_x * MOVESPEED;
+		new_dirx = -data->player.dir_y * 0.79;
+		new_diry = data->player.dir_x * 0.79;
 	}
-	raycasting(&data->player, data);
+	else
+	{
+		new_dirx = -data->player.dir_y * MOVESPEED;
+		new_diry = data->player.dir_x * MOVESPEED;
+	}
+	move_player(data, new_dirx, new_diry);
+}
+
+void	move_left(t_cub3d *data)
+{
+	double	new_dirx;
+	double	new_diry;
+
+	if (MOVESPEED > 0.79)
+	{
+		new_dirx = data->player.dir_y * 0.79;
+		new_diry = -data->player.dir_x * 0.79;
+	}
+	else
+	{
+		new_dirx = data->player.dir_y * MOVESPEED;
+		new_diry = -data->player.dir_x * MOVESPEED;
+	}
+	move_player(data, new_dirx, new_diry);
+}
+
+void	move_forward(t_cub3d *data)
+{
+	double	new_dirx;
+	double	new_diry;
+
+	if (MOVESPEED > 0.79)
+	{
+		new_dirx = data->player.dir_x * 0.79;
+		new_diry = data->player.dir_y * 0.79;
+	}
+	else
+	{
+		new_dirx = data->player.dir_x * MOVESPEED;
+		new_diry = data->player.dir_y * MOVESPEED;
+	}
+	move_player(data, new_dirx, new_diry);
+}
+
+void	move_backward(t_cub3d *data)
+{
+	double	new_dirx;
+	double	new_diry;
+
+	if (MOVESPEED > 0.79)
+	{
+		new_dirx = -data->player.dir_x * 0.79;
+		new_diry = -data->player.dir_y * 0.79;
+	}
+	else
+	{
+		new_dirx = -data->player.dir_x * MOVESPEED;
+		new_diry = -data->player.dir_y * MOVESPEED;
+	}
+	move_player(data, new_dirx, new_diry);
 }

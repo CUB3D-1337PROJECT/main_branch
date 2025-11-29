@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:51:56 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/10/07 20:12:30 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/28 17:44:43 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,14 @@ int	ft_isdigit(int c)
 int	parse_int(char	*s)
 {
 	int		i;
+	int		j;
 
 	i = 0;
+	j = 0;
+	while (s[j])
+		j++;
+	if (j > 3)
+		return (1);
 	if (!s || s[0] == '\0')
 		return (1);
 	while (s[i] == ' ' || s[i] == '\t')
