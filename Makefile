@@ -1,5 +1,5 @@
 # // slakhrou
-CC = cc #-fsanitize=address
+CC = cc	#-fsanitize=address
 # CFLAGS = -Wall -Wextra -Werror -I$(MLX_DIR) -I$(GLFW_DIR)/include
 # MLX_DIR = /home/slakhrou/Desktop/MLX42/build
 # GLFW_DIR = /home/slakhrou/Desktop/MLX42/glfw
@@ -13,14 +13,14 @@ NAME = cub3D
 CFLAGS = -Wall -Wextra -Werror
 MLX_DIR = ./MLX42
 MLXF = -I$(MLX_DIR)/include \
-		-L$(MLX_DIR)/build -lmlx42\
-		-L/goinfre/lhchiban/homebrew/lib -lglfw3 \
-		-framework Cocoa -framework OpenGL -framework IOKit
+        -L$(MLX_DIR)/build -lmlx42 \
+        -L/goinfre/lhchiban/homebrew/lib -lglfw \
+        -framework Cocoa -framework OpenGL -framework IOKit
 # CFLAGS = -Wall -Wextra -Werror
 # MLX_DIR = ./MLX42
 # MLXF = -I$(MLX_DIR)/include \
 # 		-L$(MLX_DIR)/build -lmlx42 \
-# 		-L$(MLX_DIR)/build/_deps/glfw-build/src -lglfw \
+# 		-L$(MLX_DIR)/build/_deps/glfw-build/src -lglfw3 \
 # 		-ldl -pthread -lm -lX11
 
 # 		-framework Cocoa -framework OpenGL -framework IOKit
@@ -31,10 +31,10 @@ SRC =	main.c	\
 		get_next_line/get_next_line.c	outils.c	functions.c\
 		parsing/parser.c	parsing/printing.c	parsing/parsing_map.c\
 		parsing/parsing_textures.c	parsing/hepler_functions.c\
-	parsing/colors_texture.c parsing/map_functions.c	parsing/foutils.c\
-	raycasting/clean.c raycasting/cub_img.c raycasting/cub_moves.c\
-	raycasting/cub_rotate.c raycasting/cub_utils1.c raycasting/dda_algo.c\
-		ft_split.c	ft_atoi.c	raycasting/draw_texture.c
+		parsing/colors_texture.c parsing/map_functions.c	parsing/foutils.c\
+		raycasting/clean.c raycasting/cub_img.c raycasting/cub_moves.c raycasting/cub_color.c\
+		raycasting/cub_rotate.c raycasting/cub_utils1.c raycasting/dda_algo.c\
+		ft_split.c	ft_atoi.c
 
 OBJ = $(SRC:.c=.o)
 
