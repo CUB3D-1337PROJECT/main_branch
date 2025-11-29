@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 16:34:02 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 18:34:13 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/29 20:15:35 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	parse_textures(char	**line, int fd, t_cub3d	*data)
 		splits = ft_split(*line, " \n\t");
 		if (!splits)
 			return (putstr_fd("Error\n split failed\n", 2), free(*line), 1);
-		if (fill_texture(splits, data))
+		if (fill_texture(*line, splits, data))
 			return (free(*line), free_split(splits), 1);
 		free_split(splits);
 		free(*line);

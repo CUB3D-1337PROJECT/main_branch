@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/03 12:39:34 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 18:40:43 by lhchiban         ###   ########.fr       */
+/*   Created: 2025/11/26 17:56:55 by slakhrou          #+#    #+#             */
+/*   Updated: 2025/11/29 20:17:41 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <errno.h>
-// # include "/home/slakhrou/Desktop/MLX42/include/MLX42/MLX42.h"
+ # include "/home/slakhrou/Desktop/MLX42/include/MLX42/MLX42.h"
 # include <math.h>
-# include "MLX42/include/MLX42/MLX42.h"
+//# include "MLX42/include/MLX42/MLX42.h"
 # define BUFFER_SIZE	25
 # define HEIGHT 720
 # define WIDTH 1040
@@ -162,7 +162,7 @@ int		check_data_texture(t_cub3d	*data, char	*line);
 int		count_elment(char	**str);
 int		parsing(int argc, char	**argv, t_cub3d	*data);
 int		check_extention(char	*str, char	*exten);
-int		fill_texture(char	**splits, t_cub3d	*data);
+int		fill_texture(char	*line, char	**splits, t_cub3d	*data);
 int		check_rgb(char	**split_colors, int rgb[3], char	*color);
 int		check_two_commas(char	*color);
 char	*find_identifier(char	*first_split);
@@ -195,5 +195,16 @@ void	raycasting(t_playerinfo *player, t_cub3d *data);
 void	set_dda(t_cub3d *data);
 void	ft_color(t_cub3d *data, int x, int y);
 int		is_wall(t_cub3d *data, double x, double y);
+int		check_double_slash(char	*path_texture);
+char	*get_path(char	*line, char	*ident);
+void	cub_handel_events(t_cub3d	*data);
+void	move_right(t_cub3d	*data);
+void	move_left(t_cub3d	*data);
+void	move_forward(t_cub3d	*data);
+void	move_backward(t_cub3d	*data);
+void	ft_clean(t_cub3d	*data, char	*err_type, char	*err_msg, int err_exit);
+void	raycasting(t_playerinfo	*player, t_cub3d	*data);
+void	set_dda(t_cub3d	*data);
+void	ft_color(t_cub3d	*data, int x, int y);
 
 #endif
