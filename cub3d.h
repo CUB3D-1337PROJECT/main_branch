@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:34 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 12:10:57 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/29 17:05:42 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 // # include "/home/slakhrou/Desktop/MLX42/include/MLX42/MLX42.h"
 # include <math.h>
 # include "MLX42/include/MLX42/MLX42.h"
-
 # define BUFFER_SIZE	25
 # define HEIGHT 720
 # define WIDTH 1040
@@ -78,13 +77,13 @@ typedef struct s_list
 
 typedef struct s_count
 {
-	int	nb_no_tex;
-	int	nb_so_tex;
-	int	nb_we_tex;
-	int	nb_ea_tex;
-	int	nb_flour;
-	int	nb_ceiling;
-	int	nb_players;
+	int		nb_no_tex;
+	int		nb_so_tex;
+	int		nb_we_tex;
+	int		nb_ea_tex;
+	int		nb_flour;
+	int		nb_ceiling;
+	int		nb_players;
 }			t_count;
 
 typedef struct s_textures
