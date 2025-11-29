@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:39:34 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 18:13:26 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/29 18:34:37 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ int		check_data_texture(t_cub3d	*data, char	*line);
 int		count_elment(char	**str);
 int		parsing(int argc, char	**argv, t_cub3d	*data);
 int		check_extention(char	*str, char	*exten);
-int		fill_texture(char	*line, char	**splits, t_cub3d	*data);
+int		fill_texture(char	**splits, t_cub3d	*data);
 int		check_rgb(char	**split_colors, int rgb[3], char	*color);
 int		check_two_commas(char	*color);
 char	*find_identifier(char	*first_split);
