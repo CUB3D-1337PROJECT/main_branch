@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 16:34:02 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/22 18:20:28 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/29 11:38:37 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	parse_textures(char	**line, int fd, t_cub3d	*data)
 		splits = ft_split(*line, " \n\t");
 		if (!splits)
 			return (putstr_fd("Error\n split failed\n", 2), free(*line), 1);
-		if (fill_texture(*line, splits, data))
+		if (fill_texture(splits, data))
 			return (free(*line), free_split(splits), 1);
 		free_split(splits);
 		free(*line);
@@ -96,14 +96,14 @@ int	parse_elements_map(int fd, t_cub3d	*data)
 	return (0);
 }
 
-int	check_extention(char *str, char *exten)
+int	check_extention(char	*str, char	*exten)
 {
 	int	len_str;
 	int	len_ext;
 
 	len_str = ft_strlen(str);
 	len_ext = ft_strlen(exten);
-	if (len_str <= len_ext || is_empty(str))
+	if (len_str <= len_ext || is_empty(str) || check_double_slash(str))
 	{
 		putstr_fd("Error\nInvalid file map name\n", 2);
 		return (1);
@@ -127,7 +127,7 @@ int	parsing(int argc, char	**argv, t_cub3d	*data)
 	}
 	if (check_extention(argv[1], ".cub"))
 		return (1);
-	fd = open(argv[1], O_RDONLY, 0666);
+	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 	{
 		perror("Error\n");

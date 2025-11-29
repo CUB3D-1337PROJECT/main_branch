@@ -6,16 +6,16 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:54:00 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/05 19:46:57 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/29 11:09:21 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static int	fill_in_map(t_list	*lst, t_cub3d	*data, int max_width)
+static int	fill_in_map(t_list	*lst, t_cub3d	*data, size_t max_width)
 {
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	while (lst)
@@ -27,7 +27,7 @@ static int	fill_in_map(t_list	*lst, t_cub3d	*data, int max_width)
 		j = 0;
 		while (j < max_width)
 		{
-			if (j < (int) ft_strlen(lst->line))
+			if (j < ft_strlen(lst->line))
 				data->map[i][j] = lst->line[j];
 			else
 				data->map[i][j] = ' ';
@@ -62,7 +62,7 @@ static int	check_closed_map(t_cub3d	*data, int rows, int columns)
 					return (putstr_fd("Error\n Map is not closed\n", 2), 1);
 			}
 			else if (!is_valid_content(c))
-				return (putstr_fd("Error\n Invalid map elemnt\n", 2), 1);
+				return (putstr_fd("Error\n Invalid map element\n", 2), 1);
 			j++;
 		}
 		i++;
@@ -72,7 +72,7 @@ static int	check_closed_map(t_cub3d	*data, int rows, int columns)
 
 static int	ft_store_map(t_list	*lst, t_cub3d	*data, int size)
 {
-	int		max_width;
+	size_t	max_width;
 
 	max_width = get_max_width(lst);
 	if (!lst)
@@ -127,6 +127,9 @@ int	parse_map(char *line, int fd, t_cub3d *data)
 	{
 		if (is_not_map(line) && !is_only_spaces(line))
 			break ;
+		if (ft_strchr(line, '\t'))
+			return (free(line), free_list(&lst),
+				putstr_fd("Error\n invalid map element\n", 2), 1);
 		ft_append(&lst, line);
 		count++;
 		free(line);
@@ -136,8 +139,7 @@ int	parse_map(char *line, int fd, t_cub3d *data)
 		return (free_list(&lst), 1);
 	if (ft_store_map(lst, data, count))
 	{
-		free_list(&lst);
-		return (1);
+		return (free_list(&lst), 1);
 	}
 	free_list(&lst);
 	return (0);

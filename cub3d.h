@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 17:56:55 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/26 18:04:29 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/29 11:48:49 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE	25
 # endif
-# define HEIGHT 720
-# define WIDTH 1040
+# define HEIGHT 900
+# define WIDTH 1400
 # define BLOCK_SIZE 64
 # define XMIN 0
 
@@ -159,17 +159,17 @@ int		check_data_texture(t_cub3d	*data, char	*line);
 int		count_elment(char	**str);
 int		parsing(int argc, char	**argv, t_cub3d	*data);
 int		check_extention(char	*str, char	*exten);
-int		fill_texture(char	*line, char	**splits, t_cub3d	*data);
+int		fill_texture(char	**splits, t_cub3d	*data);
 int		check_rgb(char	**split_colors, int rgb[3], char	*color);
 int		check_two_commas(char	*color);
 char	*find_identifier(char	*first_split);
 int		parse_map(char	*line, int fd, t_cub3d	*data);
-int		get_max_width(t_list	*lst);
+size_t	get_max_width(t_list	*lst);
 int		is_space_neighbour(char	**map, int i, int j);
 int		is_valid_content(char c);
 int		validate_map(t_cub3d	*data, int columns);
 void	free_list(t_list	**lst);
-void	free_cub3d(t_cub3d	*data);
+void	free_cub3d(t_cub3d	*data, char c);
 int		load_textures(t_cub3d	*data);
 void	delete_textures(t_textures	*textures);
 void	delete_textures(t_textures	*textures);
