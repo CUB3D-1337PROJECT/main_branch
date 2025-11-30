@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:38:45 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 20:16:53 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/30 17:42:50 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,10 @@ static void	init_player_info(t_cub3d *data)
 		return ;
 }
 
-// void	f()
-// {
-// 	system("leaks cub3D");
-// }
-
 int	main(int argc, char **argv)
 {
 	t_cub3d	*data;
-	// atexit(f);
+
 	data = ft_calloc(1, sizeof(t_cub3d));
 	if (!data)
 		return (free(data), putstr_fd("Error\ncalloc failed\n", 2), 1);

@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 16:06:17 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 10:44:09 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/30 17:26:22 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	validate_map(t_cub3d	*data, int columns)
 		i++;
 	}
 	if (data->counters.nb_players != 1)
-		return (putstr_fd("Error\n invalid player\n", 2), 1);
+		return (putstr_fd("Error\ninvalid player\n", 2), 1);
 	return (0);
 }
 

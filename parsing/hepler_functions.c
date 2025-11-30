@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:42:09 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 20:14:45 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/30 17:26:12 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_data_texture(t_cub3d	*data, char	*line)
 			|| data->counters.nb_so_tex != 1 || data->counters.nb_we_tex != 1
 			|| data->counters.nb_ea_tex != 1 || data->counters.nb_flour != 1))
 	{
-		putstr_fd("Error\n invalid contents(wrong Order || wrong Textures)\n",
+		putstr_fd("Error\ninvalid contents: wrong Order or wrong Textures\n",
 			2);
 		return (1);
 	}

@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 16:34:02 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 20:15:35 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/30 17:39:13 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ int	parse_textures(char	**line, int fd, t_cub3d	*data)
 			*line = get_next_line(fd, '0');
 		}
 		if (!*line)
-			return (putstr_fd("Error\n no map found \n", 2), 1);
+			return (putstr_fd("Error\nno map found \n", 2), 1);
 		if (!is_not_map(*line))
 			break ;
 		splits = ft_split(*line, " \n\t");
 		if (!splits)
-			return (putstr_fd("Error\n split failed\n", 2), free(*line), 1);
+			return (putstr_fd("Error\nsplit failed\n", 2), free(*line), 1);
 		if (fill_texture(*line, splits, data))
 			return (free(*line), free_split(splits), 1);
 		free_split(splits);
@@ -75,13 +75,13 @@ int	parse_elements_map(int fd, t_cub3d	*data)
 	line = get_next_line(fd, '0');
 	if (!line)
 	{
-		putstr_fd("Error\n invalid map file contents (empty) \n", 2);
+		putstr_fd("Error\ninvalid map file contents (empty file) \n", 2);
 		return (1);
 	}
 	if (!is_not_map(line))
 	{
 		free(line);
-		putstr_fd("Error\n invalid map file (wrong order)\n", 2);
+		putstr_fd("Error\nInvalid file contents: wrong order\n", 2);
 		return (1);
 	}
 	if (parse_textures(&line, fd, data))
@@ -130,7 +130,7 @@ int	parsing(int argc, char	**argv, t_cub3d	*data)
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 	{
-		perror("Error\n");
+		perror("Error");
 		return (1);
 	}
 	if (parse_elements_map(fd, data))

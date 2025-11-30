@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 18:36:09 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 18:45:05 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/30 17:26:09 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ char	*get_path(char	*line, char	*ident)
 	free(path);
 	if (is_empty(new_path))
 		return (free(new_path),
-			putstr_fd("Error\n invalid path texture\n", 2), NULL);
+			putstr_fd("Error\ninvalid path texture\n", 2), NULL);
 	return (new_path);
 }

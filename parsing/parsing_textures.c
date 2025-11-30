@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:54:14 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/30 17:02:38 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/30 17:29:20 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ static int	fill_data_texture(char	*line, char	*ident, t_cub3d *data)
 	if (!path)
 		return (1);
 	if (check_double_slash(path))
-		return (free(path), putstr_fd("Error\n invalid path texture\n", 2), 1);
+		return (free(path), putstr_fd("Error\ninvalid path texture\n", 2), 1);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		return (free(path), perror("Error\n can't open texture"), 1);
+		return (free(path), perror("Error\ncan't open texture"), 1);
 	else if (check_img_extention(path, ".png"))
 	{
-		putstr_fd("Error\n can't open texture (invalid picture)\n", 2);
+		putstr_fd("Error\ncan't open texture (invalid picture)\n", 2);
 		close(fd);
 		free(path);
 		return (1);
@@ -103,11 +103,11 @@ int	fill_texture(char	*line, char	**splits, t_cub3d	*data)
 	count = count_elment(splits);
 	if (count != 2 && splits[0]
 		&& (splits[0][0] == 'F' || splits[0][0] == 'C'))
-		return (putstr_fd("Error\n Invalid line  Wrong element in file\n"
+		return (putstr_fd("Error\nwrong elemnts in file\n"
 				, 2), 1);
 	ident = find_identifier(splits[0]);
 	if (!ident)
-		return (putstr_fd("Error\n wrong elemnts in file\n", 2), 1);
+		return (putstr_fd("Error\nwrong elemnts in file\n", 2), 1);
 	if (ft_strcmp(ident, "F") && ft_strcmp(ident, "C"))
 	{
 		if (fill_data_texture(line, ident, data))
