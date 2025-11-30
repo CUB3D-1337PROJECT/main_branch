@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 17:56:55 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 20:17:41 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/30 11:56:35 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <errno.h>
- # include "/home/slakhrou/Desktop/MLX42/include/MLX42/MLX42.h"
+# include "/mnt/homes/slakhrou/Desktop/MLX42/include/MLX42/MLX42.h"
 # include <math.h>
 //# include "MLX42/include/MLX42/MLX42.h"
 # define BUFFER_SIZE	25

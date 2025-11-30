@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:54:14 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 18:37:28 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/30 17:02:38 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,14 @@ static int	fill_data_colors(char *ident, char *color, t_cub3d *data)
 
 int	fill_texture(char	*line, char	**splits, t_cub3d	*data)
 {
+	int		count;
 	char	*ident;
 
+	count = count_elment(splits);
+	if (count != 2 && splits[0]
+		&& (splits[0][0] == 'F' || splits[0][0] == 'C'))
+		return (putstr_fd("Error\n Invalid line  Wrong element in file\n"
+				, 2), 1);
 	ident = find_identifier(splits[0]);
 	if (!ident)
 		return (putstr_fd("Error\n wrong elemnts in file\n", 2), 1);
