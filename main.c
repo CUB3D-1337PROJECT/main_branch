@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 12:38:45 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 18:39:56 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/29 20:47:05 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,16 @@ static void	init_player_info(t_cub3d *data)
 		return ;
 }
 
-// void	f()
-// {
-// 	system("leaks cub3D");
-// }
+void	f()
+{
+	system("leaks -q cub3D > leaks");
+	system("lsof -c cub3D > fds");
+}
 
 int	main(int argc, char **argv)
 {
 	t_cub3d	*data;
-	// atexit(f);
+	atexit(f);
 	data = ft_calloc(1, sizeof(t_cub3d));
 	if (!data)
 		return (free(data), putstr_fd("Error\ncalloc failed\n", 2), 1);
@@ -82,6 +83,7 @@ int	main(int argc, char **argv)
 	raycasting(&data->player, data);
 	cub_handel_events(data);
 	mlx_loop(data->mlx);
+	printf("SSSSSS\n");
 	free_cub3d(data, 'e');
 	return (0);
 }

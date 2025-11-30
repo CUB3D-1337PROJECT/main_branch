@@ -15,7 +15,6 @@ MLX_DIR = ./MLX42
 MLXF = -I$(MLX_DIR)/include \
         -L$(MLX_DIR)/build -lmlx42 \
         -L/goinfre/lhchiban/homebrew/lib -lglfw \
-        -framework Cocoa -framework OpenGL -framework IOKit
 # CFLAGS = -Wall -Wextra -Werror
 # MLX_DIR = ./MLX42
 # MLXF = -I$(MLX_DIR)/include \

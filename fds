@@ -1,0 +1,33 @@
+COMMAND   PID     USER   FD   TYPE DEVICE SIZE/OFF                NODE NAME
+cub3D   79995 lhchiban  cwd    DIR    1,9      986             9254268 /mnt/homes/lhchiban/Desktop/curses/main_branch
+cub3D   79995 lhchiban  txt    REG    1,9   255456             9324517 /mnt/homes/lhchiban/Desktop/curses/main_branch/cub3D
+cub3D   79995 lhchiban  txt    REG    1,8   236688 1152921500320114084 /goinfre/lhchiban/homebrew/Cellar/glfw/3.4/lib/libglfw.3.4.dylib
+cub3D   79995 lhchiban  txt    REG    1,8    28616            56938478 /Library/Preferences/Logging/.plist-cache.fYaLaCdk
+cub3D   79995 lhchiban  txt    REG    1,8 30686032 1152921500312415852 /usr/share/icu/icudt64l.dat
+cub3D   79995 lhchiban  txt    REG    1,8   235024            43054269 /private/var/db/timezone/tz/2025b.1.0/icutz/icutz44l.dat
+cub3D   79995 lhchiban  txt    REG    1,8  3757752 1152921500311959023 /System/Library/CoreServices/SystemAppearance.bundle/Contents/Resources/SystemAppearance.car
+cub3D   79995 lhchiban  txt    REG    1,8   416504 1152921500311959011 /System/Library/CoreServices/SystemAppearance.bundle/Contents/Resources/VibrantLightAppearance.car
+cub3D   79995 lhchiban  txt    REG    1,8  1074864 1152921500312293677 /System/Library/Keyboard Layouts/AppleKeyboardLayouts.bundle/Contents/Resources/AppleKeyboardLayouts-L.dat
+cub3D   79995 lhchiban  txt    REG    1,8  5103616            56971553 /private/var/folders/zz/zyxvpxvq6csfxvn_n000cqq80035xt/0/com.apple.LaunchServices.dv/com.apple.LaunchServices-1082-v2.csstore
+cub3D   79995 lhchiban  txt    REG    1,8   136100             1432308 /System/Library/Caches/com.apple.IntlDataCache.le.kbdx
+cub3D   79995 lhchiban  txt    REG    1,8   149968 1152921500311885486 /usr/lib/libobjc-trampolines.dylib
+cub3D   79995 lhchiban  txt    REG    1,8  2169148 1152921500312082702 /System/Library/Fonts/SFNS.ttf
+cub3D   79995 lhchiban  txt    REG    1,8  2311008 1152921500312442884 /System/Library/Extensions/AMDRadeonX6000GLDriver.bundle/Contents/MacOS/AMDRadeonX6000GLDriver
+cub3D   79995 lhchiban  txt    REG    1,8   331944 1152921500312072668 /System/Library/MessageTracer/SubmitDiagInfo.default.domains.searchtree
+cub3D   79995 lhchiban  txt    REG    1,8    60108            56946716 /private/var/db/analyticsd/events.whitelist
+cub3D   79995 lhchiban  txt    REG    1,8  2353284 1152921500312082648 /System/Library/Fonts/Helvetica.ttc
+cub3D   79995 lhchiban  txt    REG    1,8    65536            56971299 /private/var/folders/zz/zyxvpxvq6csfxvn_n000cqq80035xt/C/com.apple.metal/3902/libraries1.data
+cub3D   79995 lhchiban  txt    REG    1,8    65536            56971301 /private/var/folders/zz/zyxvpxvq6csfxvn_n000cqq80035xt/C/com.apple.metal/AMD Radeon Pro 5300/functions1.data
+cub3D   79995 lhchiban  txt    REG    1,8  1572480 1152921500312412802 /usr/lib/dyld
+cub3D   79995 lhchiban  txt    REG    1,8  5425091 1152921500312089846 /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/Resources/Extras2.rsrc
+cub3D   79995 lhchiban  txt    REG    1,8  3406912 1152921500311959021 /System/Library/CoreServices/SystemAppearance.bundle/Contents/Resources/Assets.car
+cub3D   79995 lhchiban    0u   CHR   16,1   0t9736                 679 /dev/ttys001
+cub3D   79995 lhchiban    1u   CHR   16,1   0t9736                 679 /dev/ttys001
+cub3D   79995 lhchiban    2u   CHR   16,1   0t9736                 679 /dev/ttys001
+cub3D   79995 lhchiban    3r   REG    1,8   331944 1152921500312072668 /System/Library/MessageTracer/SubmitDiagInfo.default.domains.searchtree
+cub3D   79995 lhchiban    4r   REG    1,8   111033 1152921500312111010 /System/Library/Frameworks/CoreImage.framework/Versions/A/Resources/ci_stdlib.metallib
+cub3D   79995 lhchiban    5r   REG    1,8   308316 1152921500312110754 /System/Library/Frameworks/CoreImage.framework/Versions/A/Resources/ci_filters.metallib
+cub3D   79995 lhchiban    6u   REG    1,8     1024            56971298 /private/var/folders/zz/zyxvpxvq6csfxvn_n000cqq80035xt/C/com.apple.metal/3902/libraries1.maps
+cub3D   79995 lhchiban    7u   REG    1,8    65536            56971299 /private/var/folders/zz/zyxvpxvq6csfxvn_n000cqq80035xt/C/com.apple.metal/3902/libraries1.data
+cub3D   79995 lhchiban    8u   REG    1,8     1024            56971300 /private/var/folders/zz/zyxvpxvq6csfxvn_n000cqq80035xt/C/com.apple.metal/AMD Radeon Pro 5300/functions1.maps
+cub3D   79995 lhchiban    9u   REG    1,8    65536            56971301 /private/var/folders/zz/zyxvpxvq6csfxvn_n000cqq80035xt/C/com.apple.metal/AMD Radeon Pro 5300/functions1.data
