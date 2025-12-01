@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 10:57:41 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/11/29 17:15:15 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:20:29 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,18 @@ static void	eventbased(mlx_key_data_t keydata, void *param)
 	if (keydata.action == 2 || keydata.action == 1)
 	{
 		if (keydata.key == MLX_KEY_ESCAPE)
+		{
 			ft_clean(data, 0, 0, 0);
+		}
 	}
+}
+
+static void	closefunction(void *param)
+{
+	t_cub3d	*data;
+
+	data = (t_cub3d *)param;
+	ft_clean(data, 0, 0, 0);
 }
 
 static void	framebased(void *param)
@@ -41,13 +51,12 @@ static void	framebased(void *param)
 		rotate_right(data, data->rotate);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 		rotate_left(data, data->rotate);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
-		ft_clean(data, 0, 0, 0);
 }
 
 void	cub_handel_events(t_cub3d *data)
 {
 	mlx_key_hook(data->mlx, eventbased, data);
+	mlx_close_hook(data->mlx, closefunction, data);
 	mlx_loop_hook(data->mlx, framebased, data);
 }
 

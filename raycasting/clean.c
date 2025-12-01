@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 11:21:49 by lhchiban          #+#    #+#             */
-/*   Updated: 2025/11/29 17:09:50 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/12/01 16:45:59 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	ft_clean(t_cub3d *data, char *err_type,
 {
 	if (err_type)
 	{
-		printf("err\n");
+		printf("Error\n");
 		putstr_fd("cub : error: ", 2);
 		putstr_fd(err_type, 2);
 	}
 	if (err_msg)
 	{
-		printf("err\n");
+		printf("Error\n");
 		putstr_fd("cub : error: ", 2);
 		putstr_fd(err_msg, 2);
 	}
@@ -33,5 +33,6 @@ void	ft_clean(t_cub3d *data, char *err_type,
 		mlx_delete_image(data->mlx, data->img);
 	if (data->mlx)
 		mlx_terminate(data->mlx);
+	free_cub3d(data, 'e');
 	exit(err_exit);
 }
