@@ -6,7 +6,7 @@
 /*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 19:42:09 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/12/01 15:22:24 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:28:46 by lhchiban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_data_texture(t_cub3d	*data, char	*line)
 			|| data->counters.nb_so_tex != 1 || data->counters.nb_we_tex != 1
 			|| data->counters.nb_ea_tex != 1 || data->counters.nb_flour != 1))
 	{
-		putstr_fd("Error\n invalid contents(wrong Order || wrong Textures)\n",
+		putstr_fd("Error\ninvalid contents: wrong Order or wrong Textures\n",
 			2);
 		return (1);
 	}

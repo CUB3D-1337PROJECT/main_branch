@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:54:00 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 11:09:21 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/30 17:27:33 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	fill_in_map(t_list	*lst, t_cub3d	*data, size_t max_width)
 		data->map[i] = malloc(max_width + 1);
 		if (!data->map[i])
 			return (free_allocation(data->map, i),
-				putstr_fd("Error\n malloc failed\n", 2), 1);
+				putstr_fd("Error\nmalloc failed\n", 2), 1);
 		j = 0;
 		while (j < max_width)
 		{
@@ -57,12 +57,12 @@ static int	check_closed_map(t_cub3d	*data, int rows, int columns)
 			if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
 			{
 				if (i == 0 || j == 0 || i == rows - 1 || j == columns - 1)
-					return (putstr_fd("Error\n Map is not closed\n", 2), 1);
+					return (putstr_fd("Error\nMap is not closed\n", 2), 1);
 				if (is_space_neighbour(data->map, i, j))
-					return (putstr_fd("Error\n Map is not closed\n", 2), 1);
+					return (putstr_fd("Error\nMap is not closed\n", 2), 1);
 			}
 			else if (!is_valid_content(c))
-				return (putstr_fd("Error\n Invalid map element\n", 2), 1);
+				return (putstr_fd("Error\nInvalid map element\n", 2), 1);
 			j++;
 		}
 		i++;
@@ -76,10 +76,10 @@ static int	ft_store_map(t_list	*lst, t_cub3d	*data, int size)
 
 	max_width = get_max_width(lst);
 	if (!lst)
-		return (putstr_fd("Error\n invalid map\n", 2), 1);
+		return (putstr_fd("Error\ninvalid map\n", 2), 1);
 	data->map = ft_calloc(size + 1, sizeof(char *));
 	if (!data->map)
-		return (putstr_fd("Error\n calloc failed\n", 2), 1);
+		return (putstr_fd("Error\ncalloc failed\n", 2), 1);
 	if (fill_in_map(lst, data, max_width))
 		return (1);
 	data->map_length = size;
@@ -108,7 +108,7 @@ int	check_empty_line_in_map(int fd, char	*line)
 		}
 		else if (line && is_not_map(line) && !is_only_spaces(line))
 		{
-			putstr_fd("Error\n wrong content after map\n", 2);
+			putstr_fd("Error\nwrong content after map\n", 2);
 			free(line);
 			return (1);
 		}
@@ -129,7 +129,7 @@ int	parse_map(char *line, int fd, t_cub3d *data)
 			break ;
 		if (ft_strchr(line, '\t'))
 			return (free(line), free_list(&lst),
-				putstr_fd("Error\n invalid map element\n", 2), 1);
+				putstr_fd("Error\ninvalid map element\n", 2), 1);
 		ft_append(&lst, line);
 		count++;
 		free(line);

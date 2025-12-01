@@ -6,7 +6,7 @@
 /*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:54:14 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 11:40:31 by slakhrou         ###   ########.fr       */
+/*   Updated: 2025/11/30 17:29:20 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,30 @@ static int	assign_texture(char *ident, char *path_texture, t_cub3d *data)
 	return (0);
 }
 
-static int	fill_data_texture(char	*ident, char	*path_texture,
-	t_cub3d *data)
+static int	fill_data_texture(char	*line, char	*ident, t_cub3d *data)
 {
-	int	fd;
+	int		fd;
+	char	*path;
 
-	if (check_double_slash(path_texture))
-		return (putstr_fd("Error\n invalid path texture\n", 2), 1);
-	fd = open(path_texture, O_RDONLY);
+	path = get_path(line, ident);
+	if (!path)
+		return (1);
+	if (check_double_slash(path))
+		return (free(path), putstr_fd("Error\ninvalid path texture\n", 2), 1);
+	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		return (perror("Error\n can't open texture"), 1);
-	else if (check_img_extention(path_texture, ".png"))
+		return (free(path), perror("Error\ncan't open texture"), 1);
+	else if (check_img_extention(path, ".png"))
 	{
-		putstr_fd("Error\n can't open texture (invalid picture)\n", 2);
+		putstr_fd("Error\ncan't open texture (invalid picture)\n", 2);
 		close(fd);
+		free(path);
 		return (1);
 	}
 	close(fd);
-	if (assign_texture(ident, path_texture, data))
-		return (1);
+	if (assign_texture(ident, path, data))
+		return (free(path), 1);
+	free(path);
 	return (0);
 }
 
@@ -90,21 +95,22 @@ static int	fill_data_colors(char *ident, char *color, t_cub3d *data)
 	return (0);
 }
 
-int	fill_texture(char	**splits, t_cub3d	*data)
+int	fill_texture(char	*line, char	**splits, t_cub3d	*data)
 {
 	int		count;
 	char	*ident;
 
 	count = count_elment(splits);
-	if (count != 2 && splits[0] && splits[0][0] != 'C' && splits[0][0] != 'F')
-		return (putstr_fd(
-				"Error\n Invalid line ( not texture and not map)\n", 2), 1);
+	if (count != 2 && splits[0]
+		&& (splits[0][0] == 'F' || splits[0][0] == 'C'))
+		return (putstr_fd("Error\nwrong elemnts in file\n"
+				, 2), 1);
 	ident = find_identifier(splits[0]);
 	if (!ident)
-		return (putstr_fd("Error\n wrong texture identifier\n", 2), 1);
+		return (putstr_fd("Error\nwrong elemnts in file\n", 2), 1);
 	if (ft_strcmp(ident, "F") && ft_strcmp(ident, "C"))
 	{
-		if (fill_data_texture(ident, splits[1], data))
+		if (fill_data_texture(line, ident, data))
 			return (free(ident), 1);
 	}
 	else if (ft_strcmp(ident, "F") == 0 || !ft_strcmp(ident, "C"))

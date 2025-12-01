@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printing.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 17:43:10 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/29 18:11:50 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/11/30 17:39:30 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,25 @@ int	load_textures(t_cub3d	*data)
 	data->texts->text_no = mlx_load_png(data->no_tex);
 	if (!data->texts->text_no)
 	{
-		perror("Error\n");
+		perror("Error");
 		return (delete_textures(data->texts), 1);
 	}
 	data->texts->text_so = mlx_load_png(data->so_tex);
 	if (!data->texts->text_so)
 	{
-		perror("Error\n");
+		perror("Error");
 		return (delete_textures(data->texts), 1);
 	}
 	data->texts->text_we = mlx_load_png(data->we_tex);
 	if (!data->texts->text_we)
 	{
-		perror("Error\n");
+		perror("Error");
 		return (delete_textures(data->texts), 1);
 	}
 	data->texts->text_ea = mlx_load_png(data->ea_tex);
 	if (!data->texts->text_ea)
 	{
-		perror("Error\n");
+		perror("Error");
 		return (delete_textures(data->texts), 1);
 	}
 	return (0);
