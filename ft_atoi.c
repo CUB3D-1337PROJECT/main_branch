@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhchiban <lhchiban@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slakhrou <slakhrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:51:56 by slakhrou          #+#    #+#             */
-/*   Updated: 2025/11/28 17:44:43 by lhchiban         ###   ########.fr       */
+/*   Updated: 2025/12/01 15:43:13 by slakhrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	parse_int(char	*s)
 
 	i = 0;
 	j = 0;
-	while (s[j])
+	while (s[j] && s[j] != '0')
 		j++;
 	if (j > 3)
 		return (1);
